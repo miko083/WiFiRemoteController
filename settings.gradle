@@ -1,0 +1,2 @@
+rootProject.name='KN_Project_App'
+include ':app'
