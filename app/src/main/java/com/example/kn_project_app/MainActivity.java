@@ -41,8 +41,9 @@ public class MainActivity extends AppCompatActivity implements MyCallback {
 
         byte[] temp = null;
         try {
-            InputStream inputStream = getAssets().open("Mikolaj_Key.pem");
+            InputStream inputStream = getAssets().open("Pawel_Key.pem");
             temp = IOUtils.toByteArray(inputStream);
+
         } catch (IOException e1){
             Log.d("No Asset", e1.getMessage());
         }
@@ -56,7 +57,6 @@ public class MainActivity extends AppCompatActivity implements MyCallback {
                 new SSHTask(privateKey, toAWSCom.getText().toString(), MainActivity.this, MainActivity.this).execute();
             }
         });
-
     }
 
     @Override
@@ -80,9 +80,29 @@ public class MainActivity extends AppCompatActivity implements MyCallback {
 
         @Override
         protected Void doInBackground(Integer... params) {
+            // Zestawianie tunelu ssh do kismeta:
+            // Tworzy na androidzie socket localhost:54321, który prowadzi do kismeta
+            // Po zestawieniu tunelu wystarczy otworzuć w przeglądarce telefonu: localhost:54321
+            // Login/hasło do kismeta, to kismet/kismet
+            //TODO: Zrobić zestawianie i zamykanie kismetTunnel za pomocą przycisku
+            SshOperations kismetTunnel = new SshOperations(privateKey);
+            try {
+                kismetTunnel.connectToKismet();
+            } catch (Exception e1) {Log.d("SSH ERROR: ", e1.getMessage());}
+            // Zestawianie tunelu ssh do raspberry:
+            // Tworzy na androidzie socket localhost:54322, który prowadzi do ssh raspberry
+            // Ten tunel jest wykorzystywany przez obiekt sshOperations
+            // TODO: przenieść to do onCreate() lub zbindować pod przycisk
+            SshOperations raspberryTunnel = new SshOperations(privateKey);
+            try {
+                raspberryTunnel.connectToRaspberry();
+            } catch (Exception e1) {Log.d("SSH ERROR: ", e1.getMessage());}
+
             SshOperations sshOperations = new SshOperations(privateKey);
             try {
-                sshOperations.open();
+                // UPDATE: moduł nie łączy się do proxy-vm.ddns.net:22, tylko do localhost:54322
+                //TODO: naprawić problem "E/SpannableStringBuilder: SPAN_EXCLUSIVE_EXCLUSIVE spans cannot have a zero length"
+                sshOperations.open("root", "localhost", 54322);
                 String ret = sshOperations.runCommand(command);
                 sshOperations.close();
                 Log.d("COMMAND OUTPUT", ret);

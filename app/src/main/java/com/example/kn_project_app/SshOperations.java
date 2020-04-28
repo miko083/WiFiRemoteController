@@ -17,20 +17,50 @@ public class SshOperations {
     private Session session;
     private byte[] privateKey;
 
+
     public SshOperations(byte[] privateKey) {
         this.privateKey = privateKey;
     }
 
-    public void open() throws JSchException {
+    //Update: jako argument trzeba podać username, host i port
+    public void open(String username, String host, int port) throws JSchException {
         JSch jSch = new JSch();
         jSch.addIdentity("", privateKey, null, null);
-        session = jSch.getSession("ubuntu", "amazon_address");
+        session = jSch.getSession(username, host, port);
         java.util.Properties config = new java.util.Properties();
         config.put("StrictHostKeyChecking", "no");
         session.setConfig(config);
         session.connect();
         Log.d("CONNNECTION: ","Conneted to AWS" );
     }
+
+    //metoda wywołuje open() zestawiając połączenie do proxy-vm.ddns.net
+    //następnie zestawia tunel: (android) localhost:54321 --> (VM) localhost:52501
+    public void connectToKismet() throws JSchException {
+        this.open("ubuntu", "proxy-vm.ddns.net", 22);
+        // SSH tunnel parameter to the kismet:
+        int tunnelLocalPort = 54321;
+        String tunnelRemoteHost = "localhost";
+        int tunnelRemotePort = 52501;
+        session.setPortForwardingL(tunnelLocalPort, tunnelRemoteHost, tunnelRemotePort);
+
+        Log.d("TUNNEL: ","Conneted to Kismet" );
+    }
+
+    //metoda wywołuje open() zestawiając połączenie do proxy-vm.ddns.net
+    //następnie zestawia tunel: (android) localhost:54322 --> (VM) localhost:50022
+    //TODO: połączyć metody connectToKismet() i connectToRaspberry() w jedną
+    public void connectToRaspberry() throws JSchException {
+        this.open("ubuntu", "proxy-vm.ddns.net", 22);
+        // SSH tunnel parameter to the kismet:
+        int tunnelLocalPort = 54322;
+        String tunnelRemoteHost = "localhost";
+        int tunnelRemotePort = 50022;
+        session.setPortForwardingL(tunnelLocalPort, tunnelRemoteHost, tunnelRemotePort);
+
+        Log.d("TUNNEL: ","Conneted to Kismet" );
+    }
+
 
     public String runCommand (String command) throws  JSchException, IOException {
         String ret = "";
