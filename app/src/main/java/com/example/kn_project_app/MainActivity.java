@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements MyCallback {
 
         byte[] temp = null;
         try {
-            InputStream inputStream = getAssets().open("Pawel_Key.pem");
+            InputStream inputStream = getAssets().open("Mikolaj_Key.pem");
             temp = IOUtils.toByteArray(inputStream);
 
         } catch (IOException e1){
@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements MyCallback {
             SshOperations kismetTunnel = new SshOperations(privateKey);
             try {
                 kismetTunnel.connectToKismet();
-            } catch (Exception e1) {Log.d("SSH ERROR: ", e1.getMessage());}
+            } catch (Exception e1) {Log.d("SSH1 ERROR: ", e1.getMessage());}
             // Zestawianie tunelu ssh do raspberry:
             // Tworzy na androidzie socket localhost:54322, który prowadzi do ssh raspberry
             // Ten tunel jest wykorzystywany przez obiekt sshOperations
@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements MyCallback {
             SshOperations raspberryTunnel = new SshOperations(privateKey);
             try {
                 raspberryTunnel.connectToRaspberry();
-            } catch (Exception e1) {Log.d("SSH ERROR: ", e1.getMessage());}
+            } catch (Exception e1) {Log.d("SSH2 ERROR: ", e1.getMessage());}
 
             SshOperations sshOperations = new SshOperations(privateKey);
             try {
@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements MyCallback {
                 if (myCallback != null)
                     myCallback.updateMyText(ret);
 
-            } catch (Exception e1) {Log.d("SSH ERROR: ", e1.getMessage());}
+            } catch (Exception e1) {Log.d("SSH3 ERROR: ", e1.getMessage());}
             return null;
         }
 
