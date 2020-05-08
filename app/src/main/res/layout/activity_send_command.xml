@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SendCommandActivity"
+    android:layout_gravity="center"
+    android:layout_margin="20dp"
+    android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/et-toAWSCom"
+            android:textColor="#f7981f"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:hint="Text To AWS"
+            android:textColorHint="#f7981f"
+            android:layout_gravity="center"
+            android:layout_marginTop="35dp"
+            android:background="@drawable/edit"
+            android:padding="20dp"
+            />
+
+        <TextView
+            android:id="@+id/tv-fromAWSCom"
+            android:textColor="#f7981f"
+            android:layout_width="300dp"
+            android:layout_height="100dp"
+            android:textColorHint="#f7981f"
+            android:layout_gravity="center"
+            android:layout_marginTop="35dp"
+            android:background="@drawable/edit"
+            android:padding="20dp"
+            />
+
+        <Button
+            android:id="@+id/sendToAWS"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:text="SEND TO AWS"
+            android:textColor="#FFFFFF"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/button"
+            />
+
+    </LinearLayout>
