@@ -23,6 +23,7 @@ import java.io.InputStream;
 public class SshOperations extends Service {
 
     private Session sessionAWS;
+    private Session sessionRaspberry;
     private Session sessionKismet;
 
     private byte[] privateKey;
@@ -63,11 +64,13 @@ public class SshOperations extends Service {
 
     public boolean connectToAWS (String username, String host, int port) throws JSchException {
 
-        sessionAWS = makeTunnel(username, host,port);
-        //sessionAWS.setPortForwardingL(54322, "localhost", 50022);
+        sessionAWS = open(username, host,port);
+        sessionAWS.setPortForwardingL(54322, "localhost", 50022);
 
-        sessionKismet = makeTunnel(username, host, port);
-        //sessionKismet.setPortForwardingL(54321,"localhost",52501);
+        sessionRaspberry = open("root", "localhost", 54322);
+
+        sessionKismet = open(username, host, port);
+        sessionKismet.setPortForwardingL(54321,"localhost",52501);
 
         Log.d("TUNNEL: ","Conneted to Kismet" );
         Log.d("CONNECTION: ","Connected to AWS");
@@ -75,7 +78,7 @@ public class SshOperations extends Service {
         return true;
     }
 
-    public Session makeTunnel(String username, String host, int port) throws JSchException{
+    public Session open(String username, String host, int port) throws JSchException{
         JSch jSch = new JSch();
         jSch.addIdentity("", privateKey, null, null);
         Session session = jSch.getSession(username, host, port);
@@ -92,6 +95,8 @@ public class SshOperations extends Service {
             sessionAWS.disconnect();
         if (sessionKismet != null)
             sessionKismet.disconnect();
+        if (sessionRaspberry != null)
+            sessionRaspberry.disconnect();
     }
 
     public boolean getStatusFromAWS(){
@@ -100,13 +105,13 @@ public class SshOperations extends Service {
         return sessionAWS.isConnected();
     }
 
-    public String sendCommandToAWS (String command) {
+    public String sendCommandToAWS (String command){
         if(getStatusFromAWS()) {
             Log.d("SENT COMMAND: ", command);
             String ret = "";
             ChannelExec channelExec = null;
             try {
-                channelExec = (ChannelExec) sessionAWS.openChannel("exec");
+                channelExec = (ChannelExec) sessionRaspberry.openChannel("exec");
             } catch (JSchException e) {
                 e.printStackTrace();
             }
