@@ -11,46 +11,66 @@
     >
 
     <ImageView
-        android:layout_width="200dp"
-        android:layout_height="180dp"
-        android:src="@drawable/aws"
+        android:layout_width="108dp"
+        android:layout_height="109dp"
         android:layout_gravity="center"
-        />
+        android:src="@drawable/kali" />
 
     <TextView
         android:id="@+id/statusAWS"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#f7981f"
+        android:textColor="@color/AWScolor"
         android:text="AWS Status: "
         android:textStyle="bold"
         android:layout_gravity="center"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:textSize="18sp"
         />
 
-
     <Button
         android:id="@+id/openKismet"
-        android:layout_width="300dp"
-        android:layout_height="80dp"
+        android:layout_width="280dp"
+        android:layout_height="65dp"
         android:layout_gravity="center"
         android:text="Kismet Website"
         android:textColor="#FFFFFF"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/button"
+        />
+
+    <Button
+        android:id="@+id/attack1"
+        android:layout_width="280dp"
+        android:layout_height="65dp"
+        android:layout_gravity="center"
+        android:text="ATTACK #1"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/button"
+        />
+
+    <Button
+        android:id="@+id/attack2"
+        android:layout_width="280dp"
+        android:layout_height="65dp"
+        android:layout_gravity="center"
+        android:text="ATTACK #2"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="10dp"
         android:background="@drawable/button"
         />
 
     <Button
         android:id="@+id/sendToAWS"
-        android:layout_width="300dp"
-        android:layout_height="80dp"
+        android:layout_width="280dp"
+        android:layout_height="65dp"
         android:layout_gravity="center"
-        android:text="AWS Command Line"
+        android:text="Command Line"
         android:textColor="#FFFFFF"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/button"
         />
 
 
-    </LinearLayout>
+</LinearLayout>

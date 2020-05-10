@@ -11,12 +11,12 @@
 
         <EditText
             android:id="@+id/et-toAWSCom"
-            android:textColor="#f7981f"
+            android:textColor="@color/AWScolor"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
             android:hint="Text To AWS"
-            android:textColorHint="#f7981f"
+            android:textColorHint="@color/AWScolor"
             android:layout_gravity="center"
             android:layout_marginTop="35dp"
             android:background="@drawable/edit"
@@ -25,10 +25,10 @@
 
         <TextView
             android:id="@+id/tv-fromAWSCom"
-            android:textColor="#f7981f"
+            android:textColor="@color/AWScolor"
             android:layout_width="300dp"
             android:layout_height="100dp"
-            android:textColorHint="#f7981f"
+            android:textColorHint="@color/AWScolor"
             android:layout_gravity="center"
             android:layout_marginTop="35dp"
             android:background="@drawable/edit"

@@ -4,5 +4,6 @@
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
     <color name="lightBlue">#2894e0</color>
-    <color name="AWScolor">#f7981f</color>
+    <color name="AWScolor">#751212</color>
+    <color name="AWSBackupColor">#f7981f</color>
 </resources>

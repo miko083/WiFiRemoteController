@@ -2,15 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:id="@+id/connectToAWS"
-        android:title="Connect to AWS" />
-
-    <item android:id="@+id/connectToRaspberry"
-        android:title="Connect to Raspberry" />
-
-    <item android:id="@+id/connectToBoth"
-        android:title="Connect to both" />
+        android:title="Connect PI" />
 
     <item android:id="@+id/disconnectAWS"
-        android:title="Disconnect AWS"/>
+        android:title="Disconnect PI"/>
 
 </menu>

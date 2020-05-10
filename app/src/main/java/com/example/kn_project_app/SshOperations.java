@@ -23,6 +23,8 @@ import java.io.InputStream;
 public class SshOperations extends Service {
 
     private Session sessionAWS;
+    private Session sessionKismet;
+
     private byte[] privateKey;
     private MyCallback mainActivity;
     Handler handler;
@@ -61,21 +63,35 @@ public class SshOperations extends Service {
 
     public boolean connectToAWS (String username, String host, int port) throws JSchException {
 
-        JSch jSch = new JSch();
-        jSch.addIdentity("", privateKey, null, null);
-        sessionAWS = jSch.getSession(username, host, port);
-        java.util.Properties config = new java.util.Properties();
-        config.put("StrictHostKeyChecking", "no");
-        sessionAWS.setConfig(config);
-        sessionAWS.connect();
+        sessionAWS = makeTunnel(username, host,port);
+        //sessionAWS.setPortForwardingL(54322, "localhost", 50022);
 
-        Log.d("CONNECTION: ","Connected to AWS" );
+        sessionKismet = makeTunnel(username, host, port);
+        //sessionKismet.setPortForwardingL(54321,"localhost",52501);
+
+        Log.d("TUNNEL: ","Conneted to Kismet" );
+        Log.d("CONNECTION: ","Connected to AWS");
+
         return true;
     }
+
+    public Session makeTunnel(String username, String host, int port) throws JSchException{
+        JSch jSch = new JSch();
+        jSch.addIdentity("", privateKey, null, null);
+        Session session = jSch.getSession(username, host, port);
+        java.util.Properties config = new java.util.Properties();
+        config.put("StrictHostKeyChecking", "no");
+        session.setConfig(config);
+        session.connect();
+        return session;
+    }
+
 
     public void disconnectAWS(){
         if (sessionAWS != null)
             sessionAWS.disconnect();
+        if (sessionKismet != null)
+            sessionKismet.disconnect();
     }
 
     public boolean getStatusFromAWS(){

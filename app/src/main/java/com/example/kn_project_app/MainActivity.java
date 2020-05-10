@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity implements MyCallback {
 
     private TextView statusAWS;
     Button sendToAWS;
+    Button exampleAttack;
     private boolean mShouldUnbind;
     private SshOperations mBoundService;
 
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements MyCallback {
 
         sendToAWS = findViewById(R.id.sendToAWS);
         statusAWS = findViewById(R.id.statusAWS);
-
+        exampleAttack = findViewById(R.id.attack1);
         sendToAWS.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -45,6 +46,16 @@ public class MainActivity extends AppCompatActivity implements MyCallback {
                     Toast.makeText(MainActivity.this, "Connect first to AWS.", Toast.LENGTH_SHORT).show();
             }
         });
+
+        exampleAttack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ListOfDevices.class);
+                startActivity(intent);
+            }
+        });
+
+
     }
 
     @Override
@@ -65,16 +76,6 @@ public class MainActivity extends AppCompatActivity implements MyCallback {
             case R.id.connectToAWS: {
                 mBoundService.setMainActivity(this);
                 startService(new Intent(this, SshOperations.class));
-                return true;
-            }
-            case R.id.connectToRaspberry: {
-                //TODO V1
-                Log.d("Raspberry: ", "Clicked");
-                return true;
-            }
-            case R.id.connectToBoth: {
-                //TODO V2
-                Log.d("Both: ", "Clicked");
                 return true;
             }
             case R.id.disconnectAWS:{
@@ -137,11 +138,9 @@ public class MainActivity extends AppCompatActivity implements MyCallback {
     /*
     private class toAWS extends AsyncTask<Integer, Void, Void> {
         MyCallback myCallback;
-
         toAWS(MyCallback callback) {
             myCallback = callback;
         }
-
         @Override
         protected Void doInBackground(Integer... params) {
             myCallback.connectToAWS();
@@ -163,19 +162,16 @@ public class MainActivity extends AppCompatActivity implements MyCallback {
     }
     /*
     private static class SSHTask extends AsyncTask<Integer, Void, Void> {
-
         private byte[] privateKey;
         private String command;
         private WeakReference<MainActivity> activityReference;
         MyCallback myCallback = null;
-
         SSHTask(byte[] privateKey, String command, MainActivity context, MyCallback callback) {
             this.privateKey = privateKey;
             this.command = command;
             this.activityReference = new WeakReference<>(context);
             this.myCallback = callback;
         }
-
         @Override
         protected Void doInBackground(Integer... params) {
             // Zestawianie tunelu ssh do kismeta:
@@ -195,7 +191,6 @@ public class MainActivity extends AppCompatActivity implements MyCallback {
             try {
                 raspberryTunnel.connectToRaspberry();
             } catch (Exception e1) {Log.d("SSH2 ERROR: ", e1.getMessage());}
-
             SshOperations sshOperations = new SshOperations(privateKey);
             try {
                 // UPDATE: moduł nie łączy się do proxy-vm.ddns.net:22, tylko do localhost:54322
@@ -206,11 +201,9 @@ public class MainActivity extends AppCompatActivity implements MyCallback {
                 Log.d("COMMAND OUTPUT", ret);
                 if (myCallback != null)
                     myCallback.updateMyText(ret);
-
             } catch (Exception e1) {Log.d("SSH3 ERROR: ", e1.getMessage());}
             return null;
         }
-
         protected Void onPostExecute () {
             MainActivity activity = activityReference.get();
             if (activity == null || activity.isFinishing())
@@ -221,5 +214,3 @@ public class MainActivity extends AppCompatActivity implements MyCallback {
      */
 
 }
-
-
