@@ -2,6 +2,7 @@ package com.example.kn_project_app;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.content.ComponentName;
 import android.content.Context;
@@ -17,12 +18,13 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 
 public class MainActivity extends AppCompatActivity implements MyCallback {
 
     private TextView statusAWS;
-    Button sendToAWS;
-    Button exampleAttack;
+    private CardView attack1, kismet, terminal;
     private boolean mShouldUnbind;
     private SshOperations mBoundService;
 
@@ -33,10 +35,11 @@ public class MainActivity extends AppCompatActivity implements MyCallback {
 
         getSupportActionBar().setTitle("Raspberry PI Connector");
 
-        sendToAWS = findViewById(R.id.sendToAWS);
+        terminal = findViewById(R.id.terminal);
         statusAWS = findViewById(R.id.statusAWS);
-        exampleAttack = findViewById(R.id.attack1);
-        sendToAWS.setOnClickListener(new View.OnClickListener() {
+        attack1 = findViewById(R.id.attack1);
+
+        terminal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(mBoundService.getStatusFromAWS()) {
@@ -47,15 +50,27 @@ public class MainActivity extends AppCompatActivity implements MyCallback {
             }
         });
 
-        exampleAttack.setOnClickListener(new View.OnClickListener() {
+
+        // -------------------------
+        // --- EXAMPLE ARRAY LIST --
+        // -------------------------
+
+        ArrayList<Device> temp = new ArrayList<>();
+        temp.add(new Device(R.drawable.access_point, "Watykan", "Access Point", 2137, "21:37:11:09:17:18:10:05"));
+        temp.add(new Device(R.drawable.phone, "Huawei", "Client", 2005, "10:05:12:39:15:65:14:35"));
+        temp.add(new Device(R.drawable.phone, "Xiaomi", "Client", 2137, "22:27:41:59:54:21:12:55"));
+        temp.add(new Device(R.drawable.phone, "Apple", "Client", 2137, "24:29:48:51:54:25:12:55"));
+
+        final ArrayList<Device> devices = temp;
+
+        attack1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, ListOfDevices.class);
+                intent.putParcelableArrayListExtra("devices", devices);
                 startActivity(intent);
             }
         });
-
-
     }
 
     @Override

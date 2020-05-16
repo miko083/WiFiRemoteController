@@ -32,4 +32,5 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation files('libs/jsch-0.1.55.jar')
     implementation files('libs/commons-io-2.6.jar')
+    implementation "androidx.cardview:cardview:1.0.0"
 }

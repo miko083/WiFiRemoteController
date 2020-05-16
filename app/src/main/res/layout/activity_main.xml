@@ -8,69 +8,281 @@
     android:layout_gravity="center"
     android:layout_margin="20dp"
     android:orientation="vertical"
+    android:padding="10dp"
+    android:background="@color/backgroundColor"
     >
-
-    <ImageView
-        android:layout_width="108dp"
-        android:layout_height="109dp"
-        android:layout_gravity="center"
-        android:src="@drawable/kali" />
 
     <TextView
         android:id="@+id/statusAWS"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/AWScolor"
+        android:textColor="#000000"
         android:text="AWS Status: "
         android:textStyle="bold"
+        android:fontFamily="sans-serif-smallcaps"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:textSize="18sp"
+        android:textSize="15sp"
         />
 
-    <Button
-        android:id="@+id/openKismet"
-        android:layout_width="280dp"
-        android:layout_height="65dp"
-        android:layout_gravity="center"
-        android:text="Kismet Website"
-        android:textColor="#FFFFFF"
-        android:layout_marginTop="15dp"
-        android:background="@drawable/button"
-        />
+    <LinearLayout
+        android:gravity="center"
+        android:clipToPadding="false"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/attack1"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:layout_height="130dp"
+            android:layout_width="160dp"
+            android:layout_margin="10dp"
+            android:background="#ffffff">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/circle_background"
+                    android:src="@drawable/ic_speaker_phone_black_24dp"
+                    android:padding="10dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:layout_marginTop="5dp"
+                    android:text="Attack One"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_margin="5dp"
+                    android:background="@color/lightGrayColor"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Do attack from Kali"
+                    android:padding="5dp"/>
 
-    <Button
-        android:id="@+id/attack1"
-        android:layout_width="280dp"
-        android:layout_height="65dp"
-        android:layout_gravity="center"
-        android:text="ATTACK #1"
-        android:textColor="#FFFFFF"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/button"
-        />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
-    <Button
-        android:id="@+id/attack2"
-        android:layout_width="280dp"
-        android:layout_height="65dp"
-        android:layout_gravity="center"
-        android:text="ATTACK #2"
-        android:textColor="#FFFFFF"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/button"
-        />
+        <androidx.cardview.widget.CardView
+            android:id="@+id/attack2"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:layout_height="130dp"
+            android:layout_width="160dp"
+            android:layout_margin="10dp"
+            android:background="#ffffff">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/circle_background"
+                    android:src="@drawable/ic_phonelink_erase_black_24dp"
+                    android:padding="10dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:layout_marginTop="5dp"
+                    android:text="Attack Two"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_margin="5dp"
+                    android:background="@color/lightGrayColor"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Do attack from Kali"
+                    android:padding="5dp"/>
 
-    <Button
-        android:id="@+id/sendToAWS"
-        android:layout_width="280dp"
-        android:layout_height="65dp"
-        android:layout_gravity="center"
-        android:text="Command Line"
-        android:textColor="#FFFFFF"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/button"
-        />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+    <LinearLayout
+        android:gravity="center"
+        android:clipToPadding="false"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/attack3"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:layout_height="130dp"
+            android:layout_width="160dp"
+            android:layout_margin="10dp"
+            android:background="#ffffff">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/circle_background"
+                    android:src="@drawable/ic_sync_disabled_black_24dp"
+                    android:padding="10dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:layout_marginTop="5dp"
+                    android:text="Attack Three"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_margin="5dp"
+                    android:background="@color/lightGrayColor"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Do attack from Kali"
+                    android:padding="5dp"/>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/attack4"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:layout_height="130dp"
+            android:layout_width="160dp"
+            android:layout_margin="10dp"
+            android:background="#ffffff">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/circle_background"
+                    android:src="@drawable/ic_signal_cellular_off_black_24dp"
+                    android:padding="10dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:layout_marginTop="5dp"
+                    android:text="Attack Four"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_margin="5dp"
+                    android:background="@color/lightGrayColor"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Do attack from Kali"
+                    android:padding="5dp"/>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+    <LinearLayout
+        android:gravity="center"
+        android:clipToPadding="false"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/kismet"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:layout_height="130dp"
+            android:layout_width="160dp"
+            android:layout_margin="10dp"
+            android:background="#ffffff">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/circle_background_second"
+                    android:src="@drawable/ic_web_asset_black_24dp"
+                    android:padding="10dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:layout_marginTop="5dp"
+                    android:text="Kismet"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_margin="5dp"
+                    android:background="@color/lightGrayColor"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Open kismet website."
+                    android:padding="5dp"/>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/terminal"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:layout_height="130dp"
+            android:layout_width="160dp"
+            android:layout_margin="10dp"
+            android:background="#ffffff">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/circle_background_second"
+                    android:src="@drawable/ic_keyboard_black_24dp"
+                    android:padding="10dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:layout_marginTop="5dp"
+                    android:text="Terminal"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_margin="5dp"
+                    android:background="@color/lightGrayColor"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Run commands directly"
+                    android:padding="5dp"/>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
 
 
 </LinearLayout>
