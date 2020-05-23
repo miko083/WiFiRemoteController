@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements MyCallback {
         terminal = findViewById(R.id.terminal);
         statusAWS = findViewById(R.id.statusAWS);
         attack1 = findViewById(R.id.attack1);
+        kismet = findViewById(R.id.kismet);
 
         terminal.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,6 +72,18 @@ public class MainActivity extends AppCompatActivity implements MyCallback {
                 startActivity(intent);
             }
         });
+
+        kismet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mBoundService.getStatusFromAWS()) {
+                    Intent intent = new Intent(MainActivity.this, KismetWebsite.class);
+                    startActivity(intent);
+                } else
+                    Toast.makeText(MainActivity.this, "Connect first to AWS.", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     @Override
