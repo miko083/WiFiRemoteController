@@ -18,46 +18,57 @@
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/manufacturer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="150dp"
+        android:id="@+id/name"
+        android:layout_width="124dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="140dp"
         android:layout_marginTop="20dp"
         android:fontFamily="sans-serif-smallcaps"
         android:text="TextView"
         android:textColor="#000000"
-        android:textSize="22sp"
+        android:textSize="14sp"
         android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/type"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="150dp"
-        android:layout_marginTop="55dp"
-        android:fontFamily="sans-serif-smallcaps"
-        android:text="TextView"
-        android:textColor="#000000"
-        android:textSize="18sp" />
+<!--    <TextView-->
+<!--        android:id="@+id/type"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="150dp"-->
+<!--        android:layout_marginTop="55dp"-->
+<!--        android:fontFamily="sans-serif-smallcaps"-->
+<!--        android:text="TextView"-->
+<!--        android:textColor="#000000"-->
+<!--        android:textSize="18sp" />-->
 
     <TextView
         android:id="@+id/macAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="150dp"
-        android:layout_marginTop="85dp"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="70dp"
         android:fontFamily="sans-serif-smallcaps"
-        android:textColor="#000000"
-        android:text="TextView" />
+        android:text="TextView"
+        android:textColor="#000000" />
 
     <TextView
         android:id="@+id/channel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="280dp"
-        android:layout_marginTop="35dp"
+        android:layout_marginStart="265dp"
+        android:layout_marginTop="60dp"
         android:fontFamily="sans-serif-smallcaps"
+        android:text="TextView"
         android:textColor="#000000"
-        android:textSize="13sp"
-        android:text="TextView" />
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/freqmhz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="265dp"
+        android:layout_marginTop="30dp"
+        android:fontFamily="sans-serif-smallcaps"
+        android:text="TextView"
+        android:textColor="#000000"
+        android:textSize="12sp" />
 </RelativeLayout>

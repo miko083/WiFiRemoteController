@@ -5,25 +5,32 @@ import android.os.Parcelable;
 
 public class Device implements Parcelable {
     private int imageNumber;
-    private String manufacturer;
+    private String name;
     private String deviceType;
-    private int channel;
+    private String channel;
     private String macAddress;
+    private String freqmhz;
+    private String bssid;
 
-    public Device(int imageNumber, String manufacturer, String deviceType, int channel, String macAddress) {
+    public Device(int imageNumber, String name, String deviceType, String channel, String macAddress, String freqmhz, String bssid) {
+    //public Device(int imageNumber, String deviceType, String channel, String macAddress) {
         this.imageNumber = imageNumber;
-        this.manufacturer = manufacturer;
+        this.name = name;
         this.deviceType = deviceType;
         this.channel = channel;
         this.macAddress = macAddress;
+        this.freqmhz = freqmhz;
+        this.bssid = bssid;
     }
 
     protected Device(Parcel in) {
         imageNumber = in.readInt();
-        manufacturer = in.readString();
+        name = in.readString();
         deviceType = in.readString();
-        channel = in.readInt();
+        channel = in.readString();
         macAddress = in.readString();
+        freqmhz = in.readString();
+        bssid = in.readString();
     }
 
     public static final Creator<Device> CREATOR = new Creator<Device>() {
@@ -42,20 +49,32 @@ public class Device implements Parcelable {
         return imageNumber;
     }
 
-    public String getManufacturer() {
-        return manufacturer;
+//    public String getManufacturer() {
+//        return manufacturer;
+//    }
+
+    public String getName() {
+        return name;
     }
 
     public String getDeviceType() {
         return deviceType;
     }
 
-    public int getChannel() {
+    public String getChannel() {
         return channel;
     }
 
     public String getMacAddress() {
         return macAddress;
+    }
+
+    public String getFreqmhz(){
+        return freqmhz;
+    }
+
+    public String getBssid(){
+        return bssid;
     }
 
     @Override
@@ -66,9 +85,11 @@ public class Device implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(imageNumber);
-        dest.writeString(manufacturer);
+        dest.writeString(name);
         dest.writeString(deviceType);
-        dest.writeInt(channel);
+        dest.writeString(channel);
         dest.writeString(macAddress);
+        dest.writeString(freqmhz);
+        dest.writeString(bssid);
     }
 }

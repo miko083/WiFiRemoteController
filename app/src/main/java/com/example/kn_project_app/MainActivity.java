@@ -18,7 +18,21 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.StringReader;
 import java.util.ArrayList;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 
 public class MainActivity extends AppCompatActivity implements MyCallback {
@@ -55,13 +69,116 @@ public class MainActivity extends AppCompatActivity implements MyCallback {
         // --- EXAMPLE ARRAY LIST --
         // -------------------------
 
-        ArrayList<Device> temp = new ArrayList<>();
-        temp.add(new Device(R.drawable.access_point, "Watykan", "Access Point", 2137, "21:37:11:09:17:18:10:05"));
-        temp.add(new Device(R.drawable.phone, "Huawei", "Client", 2005, "10:05:12:39:15:65:14:35"));
-        temp.add(new Device(R.drawable.phone, "Xiaomi", "Client", 2137, "22:27:41:59:54:21:12:55"));
-        temp.add(new Device(R.drawable.phone, "Apple", "Client", 2137, "24:29:48:51:54:25:12:55"));
+        ArrayList<Device> arrayList = new ArrayList<>();
 
-        final ArrayList<Device> devices = temp;
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        try {
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document document = builder.parse(new InputSource(getAssets().open("recent-01.kismet.netxml")));
+            document.getDocumentElement().normalize();
+//            Element root = document.getDocumentElement();
+            System.out.println("*************************************");
+//            System.out.println(root.getNodeName());
+            NodeList nList = document.getElementsByTagName("wireless-network");
+            for (int temp = 0; temp < nList.getLength(); temp++) {
+                Node nNode = nList.item(temp);
+//                System.out.println("\nCurrent Element :" + nNode.getNodeName());
+
+                try {
+                    if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                        Element eElement = (Element) nNode;
+                        if (eElement.getAttribute("type").equals("infrastructure")) {
+//                            System.out.println("Type : "
+//                                    + eElement.getAttribute("type"));
+                            System.out.println("SSID : "
+                                    + eElement
+                                    .getElementsByTagName("essid")
+                                    .item(0)
+                                    .getTextContent());
+                            System.out.println("BSSID : "
+                                    + eElement
+                                    .getElementsByTagName("BSSID")
+                                    .item(0)
+                                    .getTextContent());
+//                            System.out.println("manuf : "
+//                                    + eElement
+//                                    .getElementsByTagName("manuf")
+//                                    .item(0)
+//                                    .getTextContent());
+                            System.out.println("channel : "
+                                    + eElement
+                                    .getElementsByTagName("channel")
+                                    .item(0)
+                                    .getTextContent());
+                            System.out.println("freqmhz : "
+                                    + eElement
+                                    .getElementsByTagName("freqmhz")
+                                    .item(0)
+                                    .getTextContent());
+                            arrayList.add(new Device(R.drawable.access_point,
+                                    eElement.getElementsByTagName("essid").item(0).getTextContent().equals("") ? "<SSID unknown>" : eElement.getElementsByTagName("essid").item(0).getTextContent(),
+                                    "Access Point",
+                                    eElement.getElementsByTagName("channel").item(0).getTextContent(),
+                                    eElement.getElementsByTagName("BSSID").item(0).getTextContent(),
+                                    eElement.getElementsByTagName("freqmhz").item(0).getTextContent() + " MHz",
+                                    eElement.getElementsByTagName("BSSID").item(0).getTextContent()));
+
+
+                            // Clients of each AP:
+                            NodeList internalList = eElement.getElementsByTagName("wireless-client");
+                            for (int temp2 = 0; temp2 < internalList.getLength(); temp2++) {
+                                Node internalNode = internalList.item(temp2);
+                                if (internalNode.getNodeType() == Node.ELEMENT_NODE) {
+                                    Element internalElement = (Element) internalNode;
+                                    System.out.println("MAC : "
+                                            + internalElement
+                                            .getElementsByTagName("client-mac")
+                                            .item(0)
+                                            .getTextContent());
+                                    System.out.println("channel : "
+                                            + internalElement
+                                            .getElementsByTagName("channel")
+                                            .item(0)
+                                            .getTextContent());
+                                    arrayList.add(new Device(R.drawable.phone,
+                                            internalElement.getElementsByTagName("client-manuf").item(0).getTextContent().equals("Unknown") ? "<Manuf unkown>" : internalElement.getElementsByTagName("client-manuf").item(0).getTextContent(),
+                                            "Client",
+                                            internalElement.getElementsByTagName("channel").item(0).getTextContent(),
+                                            internalElement.getElementsByTagName("client-mac").item(0).getTextContent(),
+                                            eElement.getElementsByTagName("freqmhz").item(0).getTextContent() + " MHz",
+                                            eElement.getElementsByTagName("BSSID").item(0).getTextContent()));
+                                }
+                            }
+                        }
+                    }
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+
+//            NodeList nList = document.getElementsByTagName("wireless-network");
+//            Element eElement = (Element) nList;
+//            arrayList.add(new Device(R.drawable.access_point, eElement.getElementsByTagName("manuf").item(0).getTextContent(), "Access Point", eElement.getElementsByTagName("channel").item(0).getTextContent(), eElement.getElementsByTagName("BSSID").item(0).getTextContent()));
+//              for (int temp = 0; temp < nList.getLength(); temp++) {
+//                Node node = nList.item(temp);
+//                if (node.getNodeType() == Node.ELEMENT_NODE) {
+//                    Element eElement = (Element) node;
+//                    Element eeElement  = (Element) eElement.getElementsByTagName("SSID");
+//                    arrayList.add(new Device(R.drawable.access_point, eeElement.getElementsByTagName("essid").item(0).getTextContent(), "Access Point", eElement.getElementsByTagName("channel").item(0).getTextContent(), eElement.getElementsByTagName("BSSID").item(0).getTextContent()));
+//                }
+//            }
+
+            System.out.println("*************************************");
+        } catch (ParserConfigurationException | IOException | SAXException e) {
+            e.printStackTrace();
+        }
+
+//        temp.add(new Device(R.drawable.phone, "Huawei", "Client", 2005, "10:05:12:39:15:65:14:35"));
+//        temp.add(new Device(R.drawable.phone, "Xiaomi", "Client", 2137, "22:27:41:59:54:21:12:55"));
+//        temp.add(new Device(R.drawable.phone, "Apple", "Client", 2137, "24:29:48:51:54:25:12:55"));
+//        temp.add(new Device(R.drawable.access_point, "Watykan", "Access Point", 2137, "21:37:11:09:17:18:10:05"));
+
+        final ArrayList<Device> devices = arrayList;
 
         attack1.setOnClickListener(new View.OnClickListener() {
             @Override

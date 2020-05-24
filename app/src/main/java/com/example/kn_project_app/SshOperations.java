@@ -35,7 +35,7 @@ public class SshOperations extends Service {
         handler = new Handler();
         byte[] temp = null;
         try {
-            InputStream inputStream = getAssets().open("Mikolaj_Key.pem");
+            InputStream inputStream = getAssets().open("Pawel_Key.pem");
             temp = IOUtils.toByteArray(inputStream);
 
         } catch (IOException e1){
