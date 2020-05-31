@@ -10,8 +10,21 @@
     android:orientation="vertical">
 
     <TextView
+        android:id="@+id/channelAndFreq"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:fontFamily="sans-serif-smallcaps"
+        android:layout_marginBottom="10dp"
+        android:text="Channel and Freq"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
         android:id="@+id/deviceInfo"
-        android:layout_width="150dp"
+        android:layout_width="match_parent"
         android:layout_height="30dp"
         android:fontFamily="sans-serif-smallcaps"
         android:text="Device"
@@ -23,7 +36,7 @@
 
     <TextView
         android:id="@+id/name"
-        android:layout_width="150dp"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
         android:fontFamily="sans-serif-smallcaps"
         android:text="TextView"
@@ -35,7 +48,7 @@
 
     <TextView
         android:id="@+id/macAddress"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:layout_gravity="center"
@@ -46,7 +59,7 @@
 
     <TextView
         android:id="@+id/accessPointInfo"
-        android:layout_width="150dp"
+        android:layout_width="match_parent"
         android:layout_height="30dp"
         android:fontFamily="sans-serif-smallcaps"
         android:text="Access Point"
@@ -58,7 +71,7 @@
 
     <TextView
         android:id="@+id/nameAccessPoint"
-        android:layout_width="150dp"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
         android:fontFamily="sans-serif-smallcaps"
         android:text="TextView"
@@ -70,13 +83,26 @@
 
     <TextView
         android:id="@+id/macAddressAccessPoint"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
         android:fontFamily="sans-serif-smallcaps"
         android:text="TextView"
         android:textColor="#000000" />
+
+    <TextView
+        android:id="@+id/statusOfAttack"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:fontFamily="sans-serif-smallcaps"
+        android:text="status"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
 
     <Button
@@ -100,7 +126,6 @@
         android:layout_marginTop="20dp"
         android:background="@drawable/button"
         />
-
 
 
 </LinearLayout>

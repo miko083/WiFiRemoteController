@@ -26,6 +26,8 @@ public class AttackToggle extends AppCompatActivity implements MyCallback {
     TextView macAddressAccessPoint;
     Button startAttack;
     Button endAttack;
+    TextView channelAndFreq;
+    TextView status;
 
     private boolean mShouldUnbind;
     private SshOperations mBoundService;
@@ -53,24 +55,29 @@ public class AttackToggle extends AppCompatActivity implements MyCallback {
         startAttack = findViewById(R.id.start);
         endAttack = findViewById(R.id.end);
 
+        channelAndFreq = findViewById(R.id.channelAndFreq);
+        status = findViewById(R.id.statusOfAttack);
+
         nameDevice.setText(device.getName());
         macAddressDevice.setText(device.getMacAddress());
 
         nameAccessPoint.setText(accessPoint.getName());
         macAddressAccessPoint.setText(accessPoint.getMacAddress());
 
+        channelAndFreq.setText("Channel: " + device.getChannel() + " Freq: " + device.getFreqmhz());
+
         startAttack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d("WALACH","KLIKNIETO");
-                new executeCommand(AttackToggle.this, "touch WatykanskiAtak","ATAK PAPIEZA").execute();
+                new executeCommand(AttackToggle.this, "touch WatykanskiAtak","ATAK PAPIEZA", "Started").execute();
             }
         });
 
         endAttack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new executeCommand(AttackToggle.this,"rm WatykanskiAtak","Zakonczono atak").execute();
+                new executeCommand(AttackToggle.this,"rm WatykanskiAtak","Zakonczono atak","Ended").execute();
             }
         });
 
@@ -87,7 +94,9 @@ public class AttackToggle extends AppCompatActivity implements MyCallback {
     // ---------------------------------------
 
     public void changeAWSStatus(String text) {}
-    public void updateText(String text){}
+    public void updateText(String text){
+        status.setText("Status: " + text);
+    }
 
     // ---------------------------------------
     // ------ CONNECT TO SSH OPERATIONS ------
@@ -134,14 +143,17 @@ public class AttackToggle extends AppCompatActivity implements MyCallback {
         MyCallback mainActivity;
         String command;
         String toastText;
-        executeCommand (MyCallback mainActivity, String command, String toastText){
+        String stringToStatus;
+        executeCommand (MyCallback mainActivity, String command, String toastText, String stringToStatus){
             this.mainActivity = mainActivity;
             this.command = command;
             this.toastText = toastText;
+            this.stringToStatus = stringToStatus;
         }
         @Override
         protected Void doInBackground(Integer... params) {
             mBoundService.sendCommandToAWS(command);
+            mainActivity.updateText(stringToStatus);
             handler.post(new Runnable() {
                 @Override
                 public void run() {
