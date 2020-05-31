@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -26,14 +27,27 @@ public class ListOfDevices extends AppCompatActivity {
         ListView listView = (ListView)findViewById(R.id.listOfDevices);
 
         Intent intent = getIntent();
+        CustomAdapter customAdapter;
         ArrayList<Device> devices = intent.getParcelableArrayListExtra("devices");
-        CustomAdapter customAdapter = new CustomAdapter(devices);
+        Device accessPoint = intent.getExtras().getParcelable("accessPoint");
+        if (accessPoint != null) {
+            customAdapter = new CustomAdapter(devices, accessPoint);
+        }
+        else {
+            customAdapter = new CustomAdapter(devices);
+        }
         listView.setAdapter(customAdapter);
     }
 
     class CustomAdapter extends BaseAdapter{
 
         ArrayList<Device> devices;
+        Device accessPoint;
+
+        public CustomAdapter(ArrayList<Device> devices, Device accessPoint) {
+            this.devices = devices;
+            this.accessPoint = accessPoint;
+        }
 
         public CustomAdapter(ArrayList<Device> devices) {
             this.devices = devices;
@@ -93,6 +107,18 @@ public class ListOfDevices extends AppCompatActivity {
                         Toast.makeText(ListOfDevices.this, "Selected: " + device.getBssid(), Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(ListOfDevices.this, ListOfDevices.class);
                         intent.putParcelableArrayListExtra("devices", tempDevices);
+                        intent.putExtra("accessPoint",device);
+                        startActivity(intent);
+                    }
+                    if (device.getDeviceType().equals("Client")){
+                        Intent intent = new Intent(ListOfDevices.this, AttackToggle.class);
+                        intent.putExtra("device",device);
+                        intent.putExtra("accessPoint", accessPoint);
+                        for(Device deviceInList: devices){
+                            if(device.getBssid().equals(deviceInList.getBssid()) && deviceInList.getDeviceType().equals("Access Point")) {
+                                intent.putExtra("accessPoint", deviceInList);
+                            }
+                        }
                         startActivity(intent);
                     }
                 }

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SendCommandActivity"
+    android:layout_gravity="center"
+    android:layout_margin="20dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/deviceInfo"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:fontFamily="sans-serif-smallcaps"
+        android:text="Device"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:fontFamily="sans-serif-smallcaps"
+        android:text="TextView"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/macAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:fontFamily="sans-serif-smallcaps"
+        android:text="TextView"
+        android:textColor="#000000" />
+
+    <TextView
+        android:id="@+id/accessPointInfo"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:fontFamily="sans-serif-smallcaps"
+        android:text="Access Point"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/nameAccessPoint"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:fontFamily="sans-serif-smallcaps"
+        android:text="TextView"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/macAddressAccessPoint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:fontFamily="sans-serif-smallcaps"
+        android:text="TextView"
+        android:textColor="#000000" />
+
+
+    <Button
+        android:id="@+id/start"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:text="Start Attack"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button"
+        />
+
+    <Button
+        android:id="@+id/end"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:text="End Attack"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button"
+        />
+
+
+
+</LinearLayout>

@@ -11,9 +11,10 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".KismetWebsite"></activity>
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".AttackToggle"></activity>
+        <activity android:name=".KismetWebsite" />
         <activity android:name=".ListOfDevices" />
         <activity android:name=".SendCommandActivity" />
         <activity android:name=".MainActivity">

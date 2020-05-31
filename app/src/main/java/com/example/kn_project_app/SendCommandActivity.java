@@ -58,7 +58,7 @@ public class SendCommandActivity extends AppCompatActivity implements MyCallback
 
     public void changeAWSStatus(String text) {}
     public void updateText(String text){
-        ((TextView)findViewById(R.id.tv_fromAWSCom)).setText(text); };
+        ((TextView)findViewById(R.id.tv_fromAWSCom)).setText(text); }
 
     // ---------------------------------------
     // ------ CONNECT TO SSH OPERATIONS ------

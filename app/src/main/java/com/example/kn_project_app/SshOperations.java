@@ -35,7 +35,7 @@ public class SshOperations extends Service {
         handler = new Handler();
         byte[] temp = null;
         try {
-            InputStream inputStream = getAssets().open("Pawel_Key.pem");
+            InputStream inputStream = getAssets().open("Mikolaj_Key.pem");
             temp = IOUtils.toByteArray(inputStream);
 
         } catch (IOException e1){
@@ -112,6 +112,7 @@ public class SshOperations extends Service {
             ChannelExec channelExec = null;
             try {
                 channelExec = (ChannelExec) sessionRaspberry.openChannel("exec");
+                //channelExec = (ChannelExec) sessionAWS.openChannel("exec");
             } catch (JSchException e) {
                 e.printStackTrace();
             }
