@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements MyCallback {
                 if(mBoundService.getStatusFromAWS()) {
                     //new executeCommand(MainActivity.this, "cat example-01.kismet.netxml").execute();
                     //new executeCommand(MainActivity.this, "cat $(ls /root/.airodump/recent-0* | sort | tail -1)").execute();
-                    new executeCommand(MainActivity.this, "cat $(ls /tmp/recent-0* | sort | tail -1)").execute();
+                    new executeCommand(MainActivity.this, "cat $(ls /tmp/recent-* | sort | tail -1)").execute();
                 } else
                     Toast.makeText(MainActivity.this, "Connect first to AWS.", Toast.LENGTH_SHORT).show();
 

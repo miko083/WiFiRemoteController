@@ -75,6 +75,8 @@ public class SshOperations extends Service {
         Log.d("TUNNEL: ","Conneted to Kismet" );
         Log.d("CONNECTION: ","Connected to AWS");
 
+        //endCommandToAWS("airmon-ng start wlan1 && airodump-ng wlan1 --output-format netxml -w /tmp/recent > /dev/null 2>&1");
+
         return true;
     }
 
@@ -205,6 +207,7 @@ public class SshOperations extends Service {
                             mainActivity.changeAWSStatus("Online");
                         }
                     });
+                    sendCommandToAWS("killall airodump-ng; airmon-ng stop wlan1; airmon-ng start wlan1 && airodump-ng wlan1 --output-format netxml -w /tmp/recent > /dev/null 2>&1");
                 } catch (JSchException e) {
                     handler.post(new Runnable() {
                         @Override
