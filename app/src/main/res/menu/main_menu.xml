@@ -7,4 +7,7 @@
     <item android:id="@+id/disconnectAWS"
         android:title="Disconnect PI"/>
 
+    <item android:id="@+id/getListOfDevices"
+        android:title="List of connected devices"/>
+
 </menu>

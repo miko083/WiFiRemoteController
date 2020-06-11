@@ -35,7 +35,7 @@ public class SshOperations extends Service {
         handler = new Handler();
         byte[] temp = null;
         try {
-            InputStream inputStream = getAssets().open("Pawel_Key.pem");
+            InputStream inputStream = getAssets().open("Mikolaj_Key.pem");
             temp = IOUtils.toByteArray(inputStream);
 
         } catch (IOException e1){
@@ -69,15 +69,21 @@ public class SshOperations extends Service {
 
         sessionRaspberry = open("root", "localhost", 54322);
 
-        sessionKismet = open(username, host, port);
-        sessionKismet.setPortForwardingL(54321,"localhost",52501);
-
         Log.d("TUNNEL: ","Conneted to Kismet" );
         Log.d("CONNECTION: ","Connected to AWS");
 
         //endCommandToAWS("airmon-ng start wlan1 && airodump-ng wlan1 --output-format netxml -w /tmp/recent > /dev/null 2>&1");
 
         return true;
+    }
+
+    public void openKismet (String username, String host, int port) throws JSchException {
+        sessionKismet = open(username, host, port);
+        sessionKismet.setPortForwardingL(54321,"localhost",52501);
+    }
+
+    public void closeKismet(){
+        sessionKismet.disconnect();
     }
 
     public Session open(String username, String host, int port) throws JSchException{

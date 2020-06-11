@@ -27,12 +27,14 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity implements MyCallback {
 
     private TextView statusAWS;
-    private CardView attack1, kismet, terminal;
+    private CardView attack1, kismet, terminal, attack2, attack3, attack4;
     private boolean mShouldUnbind;
     private SshOperations mBoundService;
+    Handler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        handler = new Handler();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -41,6 +43,9 @@ public class MainActivity extends AppCompatActivity implements MyCallback {
         terminal = findViewById(R.id.terminal);
         statusAWS = findViewById(R.id.statusAWS);
         attack1 = findViewById(R.id.attack1);
+        attack2 = findViewById(R.id.attack2);
+        attack3 = findViewById(R.id.attack3);
+        attack4 = findViewById(R.id.attack4);
         kismet = findViewById(R.id.kismet);
 
         terminal.setOnClickListener(new View.OnClickListener() {
@@ -58,9 +63,48 @@ public class MainActivity extends AppCompatActivity implements MyCallback {
             @Override
             public void onClick(View v) {
                 if(mBoundService.getStatusFromAWS()) {
-                    //new executeCommand(MainActivity.this, "cat example-01.kismet.netxml").execute();
+                    //new executeCommand(MainActivity.this, "cat example-01.kismet.netxml",1).execute();
                     //new executeCommand(MainActivity.this, "cat $(ls /root/.airodump/recent-0* | sort | tail -1)").execute();
-                    new executeCommand(MainActivity.this, "cat $(ls /tmp/recent-* | sort | tail -1)").execute();
+                    new executeCommand(MainActivity.this, "cat $(ls /tmp/recent-* | sort | tail -1)",1).execute();
+                } else
+                    Toast.makeText(MainActivity.this, "Connect first to AWS.", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+        attack2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mBoundService.getStatusFromAWS()) {
+                    //new executeCommand(MainActivity.this, "cat example-01.kismet.netxml",2).execute();
+                    //new executeCommand(MainActivity.this, "cat $(ls /root/.airodump/recent-0* | sort | tail -1)").execute();
+                    new executeCommand(MainActivity.this, "cat $(ls /tmp/recent-* | sort | tail -1)",2).execute();
+                } else
+                    Toast.makeText(MainActivity.this, "Connect first to AWS.", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+        attack3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mBoundService.getStatusFromAWS()) {
+                    //new executeCommand(MainActivity.this, "cat example-01.kismet.netxml",3).execute();
+                    //new executeCommand(MainActivity.this, "cat $(ls /root/.airodump/recent-0* | sort | tail -1)").execute();
+                    new executeCommand(MainActivity.this, "cat $(ls /tmp/recent-* | sort | tail -1)",2).execute();
+                } else
+                    Toast.makeText(MainActivity.this, "Connect first to AWS.", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+        attack4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mBoundService.getStatusFromAWS()) {
+                    new executeCommand(MainActivity.this, "touch wirusWatykanczyk",4, "Utworzono wirus watykanczyk").execute();
+                    //new executeCommand(MainActivity.this, "cat $(ls /root/.airodump/recent-0* | sort | tail -1)").execute();
+                    //new executeCommand(MainActivity.this, "cat $(ls /tmp/recent-* | sort | tail -1)",1).execute();
                 } else
                     Toast.makeText(MainActivity.this, "Connect first to AWS.", Toast.LENGTH_SHORT).show();
 
@@ -104,6 +148,15 @@ public class MainActivity extends AppCompatActivity implements MyCallback {
                 changeAWSStatus("Offline");
                 mBoundService.disconnectAWS();
                 Toast.makeText(this, "Disconnected", Toast.LENGTH_SHORT).show();
+            }
+            case R.id.getListOfDevices:{
+                if (mBoundService.getStatusFromAWS()){
+                    //new executeCommand(MainActivity.this, "cat example-01.kismet.netxml",2137).execute();
+                    new executeCommand(MainActivity.this, "cat $(ls /tmp/recent-* | sort | tail -1)",2137).execute();
+                }
+                else {
+                    Toast.makeText(MainActivity.this, "Connect first to AWS.", Toast.LENGTH_SHORT).show();
+                }
             }
         }
         return true;
@@ -162,17 +215,37 @@ public class MainActivity extends AppCompatActivity implements MyCallback {
     private class executeCommand extends AsyncTask<Integer, Void, Void> {
         MyCallback mainActivity;
         String command;
-        executeCommand (MyCallback mainActivity, String command){
+        int attackNumber;
+        String toastText;
+        executeCommand (MyCallback mainActivity, String command, int attackNumber){
             this.mainActivity = mainActivity;
             this.command = command;
+            this.attackNumber = attackNumber;
+        }
+        executeCommand (MyCallback mainActivity, String command, int attackNumber, String toastText){
+            this.mainActivity = mainActivity;
+            this.command = command;
+            this.attackNumber = attackNumber;
+            this.toastText = toastText;
         }
         @Override
         protected Void doInBackground(Integer... params) {
+            if (attackNumber == 4){
+                mBoundService.sendCommandToAWS(command);
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(MainActivity.this, toastText, Toast.LENGTH_SHORT).show();
+                    }
+                });
+                return null;
+            }
             String list = mBoundService.sendCommandToAWS(command);
             ArrayList<Device> devices = DeviceConverter.convertFromXmlToDevice(list);
             Intent intent = new Intent(MainActivity.this, ListOfDevices.class);
             intent.putParcelableArrayListExtra("devices", devices);
             intent.putExtra("ifDeviceList", false);
+            intent.putExtra("attackNumber", attackNumber);
             startActivity(intent);
             return null;
             }
