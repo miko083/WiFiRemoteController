@@ -72,7 +72,7 @@ public class SshOperations extends Service {
         Log.d("TUNNEL: ","Conneted to Kismet" );
         Log.d("CONNECTION: ","Connected to AWS");
 
-        //endCommandToAWS("airmon-ng start wlan1 && airodump-ng wlan1 --output-format netxml -w /tmp/recent > /dev/null 2>&1");
+        //sendCommandToAWS("airmon-ng start wlan1 && airodump-ng wlan1 --output-format netxml -w /tmp/recent > /dev/null 2>&1");
 
         return true;
     }

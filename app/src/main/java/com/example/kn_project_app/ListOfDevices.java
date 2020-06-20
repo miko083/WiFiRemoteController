@@ -127,14 +127,21 @@ public class ListOfDevices extends AppCompatActivity implements MyCallback {
                             }
                             Intent intent = new Intent(ListOfDevices.this, ListOfDevices.class);
                             intent.putParcelableArrayListExtra("devices", tempDevices);
+                            intent.putExtra("attackNumber", attackNumber);
                             intent.putExtra("accessPoint", device);
                             startActivity(intent);
                         }
                         if (attackNumber == 2){
-                            new executeCommand(ListOfDevices.this, "touch Watykan", "Atak Drugi Watykanu", "Watykan to potęga").execute();
+                            Intent intent = new Intent(ListOfDevices.this, AttackToggleAccessPoint.class);
+                            intent.putExtra("device",device);
+                            intent.putExtra("attackNumber",attackNumber);
+                            startActivity(intent);
                         }
                         if (attackNumber == 3){
-                            new executeCommand(ListOfDevices.this, "touch Watykan", "Atak Trzeci Watykanu", "Watykan to potęga").execute();
+                            Intent intent = new Intent(ListOfDevices.this, AttackToggleAccessPoint.class);
+                            intent.putExtra("device",device);
+                            intent.putExtra("attackNumber",attackNumber);
+                            startActivity(intent);
                         }
                     }
                     if (device.getDeviceType().equals("Client")){

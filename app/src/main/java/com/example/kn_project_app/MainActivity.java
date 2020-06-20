@@ -151,8 +151,8 @@ public class MainActivity extends AppCompatActivity implements MyCallback {
             }
             case R.id.getListOfDevices:{
                 if (mBoundService.getStatusFromAWS()){
-                    //new executeCommand(MainActivity.this, "cat example-01.kismet.netxml",2137).execute();
-                    new executeCommand(MainActivity.this, "cat $(ls /tmp/recent-* | sort | tail -1)",2137).execute();
+                    new executeCommand(MainActivity.this, "cat example-01.kismet.netxml",2137).execute();
+                    //new executeCommand(MainActivity.this, "cat $(ls /tmp/recent-* | sort | tail -1)",2137).execute();
                 }
                 else {
                     Toast.makeText(MainActivity.this, "Connect first to AWS.", Toast.LENGTH_SHORT).show();
