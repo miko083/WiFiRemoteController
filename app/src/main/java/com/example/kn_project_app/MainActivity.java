@@ -102,9 +102,11 @@ public class MainActivity extends AppCompatActivity implements MyCallback {
             @Override
             public void onClick(View v) {
                 if(mBoundService.getStatusFromAWS()) {
-                    new executeCommand(MainActivity.this, "touch wirusWatykanczyk",4, "Utworzono wirus watykanczyk").execute();
+                    //new executeCommand(MainActivity.this, "touch wirusWatykanczyk",4, "Utworzono wirus watykanczyk").execute();
                     //new executeCommand(MainActivity.this, "cat $(ls /root/.airodump/recent-0* | sort | tail -1)").execute();
                     //new executeCommand(MainActivity.this, "cat $(ls /tmp/recent-* | sort | tail -1)",1).execute();
+                    Intent intent = new Intent(MainActivity.this, AttackToggleOnOffOnly.class);
+                    startActivity(intent);
                 } else
                     Toast.makeText(MainActivity.this, "Connect first to AWS.", Toast.LENGTH_SHORT).show();
 

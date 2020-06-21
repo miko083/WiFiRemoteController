@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".AttackToggleAccessPoint"></activity>
+        <activity android:name=".AttackToggleOnOffOnly"></activity>
+        <activity android:name=".AttackToggleAccessPoint" />
         <activity android:name=".AttackToggle" />
         <activity android:name=".KismetWebsite" />
         <activity android:name=".ListOfDevices" />
