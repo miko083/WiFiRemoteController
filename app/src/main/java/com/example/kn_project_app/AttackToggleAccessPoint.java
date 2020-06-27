@@ -39,31 +39,12 @@ public class AttackToggleAccessPoint extends AppCompatActivity implements MyCall
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_attack_toggle_access_point);
 
-        String tempAttackCommand = "";
-        String tempEndCommand = "";
-        String tempStatusToToastStarted = "";
-        String tempStatusToToastEnded = "";
-
         final Device device = getIntent().getExtras().getParcelable("device");
-        int attackNumber = getIntent().getExtras().getInt("attackNumber");
 
-        if (attackNumber == 2){
-            tempAttackCommand = "touch watykan";
-            tempEndCommand = "rm watykan";
-            tempStatusToToastStarted = "DRUGI ATAK NA WATYKAN PRZEPROWADZONO POMYSLNIE";
-            tempStatusToToastEnded = "DRUGI ATAK NA WATYKAN ZAKONCZONO POMYSLNIE";
-        }
-        else if (attackNumber == 3){
-            tempAttackCommand = "touch watykan";
-            tempEndCommand = "rm watykan";
-            tempStatusToToastStarted = "TRZECI ATAK NA WATYKAN PRZEPROWADZONO POMYSLNIE";
-            tempStatusToToastEnded = "TRZECI ATAK NA WATYKAN ZAKONCZONO POMYSLNIE";
-        }
-
-        final String attackCommand = tempAttackCommand;
-        final String endCommand = tempEndCommand;
-        final String statusToToastStarted = tempStatusToToastStarted;
-        final String statusToToastEnded = tempStatusToToastEnded;
+        final String attackCommand = "touch watykan";
+        final String endCommand = "rm watykan";
+        final String statusToToastStarted = "DRUGI ATAK NA WATYKAN PRZEPROWADZONO POMYSLNIE";
+        final String statusToToastEnded = "DRUGI ATAK NA WATYKAN ZAKONCZONO POMYSLNIE";
 
 
         getSupportActionBar().setTitle(device.getName());

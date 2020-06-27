@@ -8,6 +8,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -18,6 +19,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.jcraft.jsch.JSchException;
 
 import java.util.ArrayList;
 
@@ -31,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements MyCallback {
     private boolean mShouldUnbind;
     private SshOperations mBoundService;
     Handler handler;
+    private Uri uri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements MyCallback {
                 if(mBoundService.getStatusFromAWS()) {
                     //new executeCommand(MainActivity.this, "cat example-01.kismet.netxml",3).execute();
                     //new executeCommand(MainActivity.this, "cat $(ls /root/.airodump/recent-0* | sort | tail -1)").execute();
-                    new executeCommand(MainActivity.this, "cat $(ls /tmp/recent-* | sort | tail -1)",2).execute();
+                    new executeCommand(MainActivity.this, "cat $(ls /tmp/recent-* | sort | tail -1)",3).execute();
                 } else
                     Toast.makeText(MainActivity.this, "Connect first to AWS.", Toast.LENGTH_SHORT).show();
 
@@ -117,7 +121,9 @@ public class MainActivity extends AppCompatActivity implements MyCallback {
             @Override
             public void onClick(View v) {
                 if(mBoundService.getStatusFromAWS()) {
-                    Intent intent = new Intent(MainActivity.this, KismetWebsite.class);
+                    new openKismetBackground().execute();
+                    uri = Uri.parse("http://localhost:54321"); // missing 'http://' will cause crashed
+                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                     startActivity(intent);
                 } else
                     Toast.makeText(MainActivity.this, "Connect first to AWS.", Toast.LENGTH_SHORT).show();
@@ -251,5 +257,20 @@ public class MainActivity extends AppCompatActivity implements MyCallback {
             startActivity(intent);
             return null;
             }
+    }
+
+    private class openKismetBackground extends AsyncTask<Integer, Void, Void> {
+        openKismetBackground (){}
+        @Override
+        protected Void doInBackground(Integer... params) {
+            mBoundService.sendCommandToAWS("killall kismet; killall airodump-ng; killall aireplay-ng; killall mdk3; airmon-ng stop wlan1; airmon-ng start wlan1; tmux new-session -d -s kismet 'kismet -c wlan1'");
+            try {
+                mBoundService.openKismet("ubuntu", "proxy-vm.ddns.net", 22);
+                Log.d("TEST", "CWEL LEGIA CWEL AUU");
+            } catch (JSchException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
     }
 }

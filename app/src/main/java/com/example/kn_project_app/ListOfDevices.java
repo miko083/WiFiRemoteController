@@ -115,7 +115,7 @@ public class ListOfDevices extends AppCompatActivity implements MyCallback {
                 public void onClick(View v) {
                     if (device.getDeviceType().equals("Access Point")) {
                         Toast.makeText(ListOfDevices.this, "Selected: " + device.getBssid(), Toast.LENGTH_SHORT).show();
-                        if (attackNumber == 1) {
+                        if (attackNumber == 1 || attackNumber == 3) {
                             ArrayList<Device> tempDevices = new ArrayList<>();
                             for (Device deviceInList : devices) {
                                 try {
@@ -137,18 +137,13 @@ public class ListOfDevices extends AppCompatActivity implements MyCallback {
                             intent.putExtra("attackNumber",attackNumber);
                             startActivity(intent);
                         }
-                        if (attackNumber == 3){
-                            Intent intent = new Intent(ListOfDevices.this, AttackToggleAccessPoint.class);
-                            intent.putExtra("device",device);
-                            intent.putExtra("attackNumber",attackNumber);
-                            startActivity(intent);
-                        }
                     }
                     if (device.getDeviceType().equals("Client")){
-                        if (attackNumber == 1) {
+                        if (attackNumber == 1 || attackNumber == 3) {
                             Intent intent = new Intent(ListOfDevices.this, AttackToggle.class);
                             intent.putExtra("device", device);
                             intent.putExtra("accessPoint", accessPoint);
+                            intent.putExtra("attackNumber",attackNumber);
                             for (Device deviceInList : devices) {
                                 if (device.getBssid().equals(deviceInList.getBssid()) && deviceInList.getDeviceType().equals("Access Point")) {
                                     intent.putExtra("accessPoint", deviceInList);
