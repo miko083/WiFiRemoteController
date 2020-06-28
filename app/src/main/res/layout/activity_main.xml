@@ -52,7 +52,7 @@
                     android:layout_height="45dp"
                     android:background="@drawable/circle_background"
                     android:padding="10dp"
-                    android:src="@drawable/ic_speaker_phone_black_24dp" />
+                    android:src="@drawable/baseline_block_white_24dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -99,7 +99,7 @@
                     android:layout_height="45dp"
                     android:background="@drawable/circle_background"
                     android:padding="10dp"
-                    android:src="@drawable/ic_phonelink_erase_black_24dp" />
+                    android:src="@drawable/baseline_flash_on_white_24dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -149,7 +149,7 @@
                     android:layout_width="45dp"
                     android:layout_height="45dp"
                     android:background="@drawable/circle_background"
-                    android:src="@drawable/ic_sync_disabled_black_24dp"
+                    android:src="@drawable/baseline_sync_problem_white_24dp"
                     android:padding="10dp" />
                 <TextView
                     android:layout_width="wrap_content"
@@ -191,7 +191,7 @@
                     android:layout_width="45dp"
                     android:layout_height="45dp"
                     android:background="@drawable/circle_background"
-                    android:src="@drawable/ic_signal_cellular_off_black_24dp"
+                    android:src="@drawable/baseline_visibility_off_white_24dp"
                     android:padding="10dp" />
                 <TextView
                     android:layout_width="wrap_content"
@@ -238,7 +238,7 @@
                     android:layout_width="45dp"
                     android:layout_height="45dp"
                     android:background="@drawable/circle_background_second"
-                    android:src="@drawable/ic_web_asset_black_24dp"
+                    android:src="@drawable/baseline_http_white_24dp"
                     android:padding="10dp" />
                 <TextView
                     android:layout_width="wrap_content"
@@ -280,7 +280,7 @@
                     android:layout_width="45dp"
                     android:layout_height="45dp"
                     android:background="@drawable/circle_background_second"
-                    android:src="@drawable/ic_keyboard_black_24dp"
+                    android:src="@drawable/baseline_admin_panel_settings_white_24dp"
                     android:padding="10dp" />
                 <TextView
                     android:layout_width="wrap_content"
