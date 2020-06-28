@@ -55,7 +55,7 @@
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:layout_marginTop="5dp"
-                    android:text="Attack One"/>
+                    android:text="Deauthentication"/>
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -65,7 +65,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Do attack from Kali"
+                    android:textSize="11dp"
+                    android:text="Kicks out everybody found from AP"
                     android:padding="5dp"/>
 
             </LinearLayout>
@@ -95,7 +96,7 @@
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:layout_marginTop="5dp"
-                    android:text="Attack Two"/>
+                    android:text="Fake authentication DoS"/>
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -105,7 +106,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Do attack from Kali"
+                    android:textSize="11dp"
+                    android:text="Too much clients can freeze or reset some APs."
                     android:padding="5dp"/>
 
             </LinearLayout>
@@ -141,7 +143,7 @@
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:layout_marginTop="5dp"
-                    android:text="Attack Three"/>
+                    android:text="Fake Probe Response"/>
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -151,7 +153,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Do attack from Kali"
+                    android:textSize="11dp"
+                    android:text="Respond to all probes and enable beaconing of probed ESSID"
                     android:padding="5dp"/>
 
             </LinearLayout>
@@ -181,7 +184,7 @@
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:layout_marginTop="5dp"
-                    android:text="Attack Four"/>
+                    android:text="Beacon Flood"/>
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -191,7 +194,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Do attack from Kali"
+                    android:textSize="11dp"
+                    android:text="Sends beacon frames to show fake APs at clients."
                     android:padding="5dp"/>
 
             </LinearLayout>
@@ -237,6 +241,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
+                    android:textSize="11dp"
                     android:text="Open kismet website."
                     android:padding="5dp"/>
 
@@ -277,7 +282,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Run commands directly"
+                    android:textSize="11dp"
+                    android:text="Run commands directly on the raspberry pi."
                     android:padding="5dp"/>
 
             </LinearLayout>

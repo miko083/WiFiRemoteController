@@ -213,7 +213,7 @@ public class SshOperations extends Service {
                             mainActivity.changeAWSStatus("Online");
                         }
                     });
-                    sendCommandToAWS("tmux new-session -d -s launchApp 'airmon-ng start wlan1 >/dev/null 2>&1 && airodump-ng wlan1 --output-format netxml -w /tmp/recent' >/dev/null 2>&1");
+                    sendCommandToAWS("tmux kill-session -t kismet; tmux kill-session -t airodump; tmux kill-session -t deAuth; tmux kill-session -t fakeProbe; tmux kill-session -t fakeAuth; tmux kill-session -t beaconFlood; airmon-ng stop wlan1; tmux new-session -d -s airodump 'airmon-ng start wlan1 && airodump-ng wlan1 --output-format netxml -w /tmp/recent'");
                 } catch (JSchException e) {
                     handler.post(new Runnable() {
                         @Override

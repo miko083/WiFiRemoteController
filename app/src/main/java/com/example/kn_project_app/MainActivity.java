@@ -153,13 +153,15 @@ public class MainActivity extends AppCompatActivity implements MyCallback {
                 return true;
             }
             case R.id.disconnectAWS:{
+                //new executeCommand(MainActivity.this, "tmux kill-session -t kismet; tmux kill-session -t airodump; tmux kill-session -t deAuth; tmux kill-session -t fakeProbe; tmux kill-session -t fakeAuth; tmux kill-session -t beaconFlood; airmon-ng stop wlan1", 0).execute();
+                //mBoundService.sendCommandToAWS("tmux kill-session -t kismet; tmux kill-session -t airodump; tmux kill-session -t deAuth; tmux kill-session -t fakeProbe; tmux kill-session -t fakeAuth; tmux kill-session -t beaconFlood; airmon-ng stop wlan1");
                 changeAWSStatus("Offline");
                 mBoundService.disconnectAWS();
                 Toast.makeText(this, "Disconnected", Toast.LENGTH_SHORT).show();
             }
             case R.id.getListOfDevices:{
                 if (mBoundService.getStatusFromAWS()){
-                    new executeCommand(MainActivity.this, "cat example-01.kismet.netxml",2137).execute();
+                    new executeCommand(MainActivity.this, "cat $(ls /tmp/recent-* | sort | tail -1)", 0).execute();
                     //new executeCommand(MainActivity.this, "cat $(ls /tmp/recent-* | sort | tail -1)",2137).execute();
                 }
                 else {
@@ -263,10 +265,9 @@ public class MainActivity extends AppCompatActivity implements MyCallback {
         openKismetBackground (){}
         @Override
         protected Void doInBackground(Integer... params) {
-            mBoundService.sendCommandToAWS("killall kismet; killall airodump-ng; killall aireplay-ng; killall mdk3; airmon-ng stop wlan1; airmon-ng start wlan1; tmux new-session -d -s kismet 'kismet -c wlan1'");
+            mBoundService.sendCommandToAWS("tmux new-session -d -s kismet 'airmon-ng stop wlan1; airmon-ng start wlan1 && kismet -c wlan1'");
             try {
                 mBoundService.openKismet("ubuntu", "proxy-vm.ddns.net", 22);
-                Log.d("TEST", "CWEL LEGIA CWEL AUU");
             } catch (JSchException e) {
                 e.printStackTrace();
             }

