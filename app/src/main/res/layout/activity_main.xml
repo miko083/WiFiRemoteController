@@ -6,9 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:layout_gravity="center"
-    android:layout_margin="20dp"
+    android:layout_margin="0dp"
     android:orientation="vertical"
-    android:padding="10dp"
+    android:padding="0dp"
     android:background="@color/backgroundColor"
     >
 
@@ -26,89 +26,102 @@
         />
 
     <LinearLayout
-        android:gravity="center"
-        android:clipToPadding="false"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:gravity="center"
         android:orientation="horizontal">
+
         <androidx.cardview.widget.CardView
             android:id="@+id/attack1"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:clickable="true"
-            android:layout_height="130dp"
             android:layout_width="160dp"
+            android:layout_height="130dp"
             android:layout_margin="10dp"
-            android:background="#ffffff">
+            android:background="#ffffff"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground">
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:gravity="center">
+                android:layout_height="124dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
                 <ImageView
                     android:layout_width="45dp"
                     android:layout_height="45dp"
                     android:background="@drawable/circle_background"
-                    android:src="@drawable/ic_speaker_phone_black_24dp"
-                    android:padding="10dp" />
+                    android:padding="10dp"
+                    android:src="@drawable/ic_speaker_phone_black_24dp" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
                     android:layout_marginTop="5dp"
-                    android:text="Deauthentication"/>
+                    android:text="Deauthentication"
+                    android:textSize="12dp"
+                    android:textStyle="bold" />
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_margin="5dp"
-                    android:background="@color/lightGrayColor"/>
+                    android:background="@color/lightGrayColor" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:textSize="11dp"
+                    android:padding="5dp"
                     android:text="Kicks out everybody found from AP"
-                    android:padding="5dp"/>
+                    android:textSize="11dp" />
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/attack2"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:clickable="true"
-            android:layout_height="130dp"
             android:layout_width="160dp"
+            android:layout_height="130dp"
             android:layout_margin="10dp"
-            android:background="#ffffff">
+            android:background="#ffffff"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="vertical">
+
                 <ImageView
                     android:layout_width="45dp"
                     android:layout_height="45dp"
                     android:background="@drawable/circle_background"
-                    android:src="@drawable/ic_phonelink_erase_black_24dp"
-                    android:padding="10dp" />
+                    android:padding="10dp"
+                    android:src="@drawable/ic_phonelink_erase_black_24dp" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
                     android:layout_marginTop="5dp"
-                    android:text="Fake authentication DoS"/>
+                    android:text="Fake authentication DoS"
+                    android:textSize="12dp"
+                    android:textStyle="bold" />
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_margin="5dp"
-                    android:background="@color/lightGrayColor"/>
+                    android:background="@color/lightGrayColor" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:textSize="11dp"
+                    android:padding="5dp"
                     android:text="Too much clients can freeze or reset some APs."
-                    android:padding="5dp"/>
+                    android:textSize="11dp" />
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -143,6 +156,7 @@
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:layout_marginTop="5dp"
+                    android:textSize="12dp"
                     android:text="Fake Probe Response"/>
                 <View
                     android:layout_width="match_parent"
@@ -231,6 +245,7 @@
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:layout_marginTop="5dp"
+                    android:textSize="12dp"
                     android:text="Kismet"/>
                 <View
                     android:layout_width="match_parent"
@@ -272,6 +287,7 @@
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:layout_marginTop="5dp"
+                    android:textSize="12dp"
                     android:text="Terminal"/>
                 <View
                     android:layout_width="match_parent"
