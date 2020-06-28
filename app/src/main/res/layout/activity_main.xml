@@ -105,7 +105,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="Fake authentication DoS"
+                    android:text="Fake Authentication DoS"
                     android:textSize="12dp"
                     android:textStyle="bold" />
 
@@ -120,7 +120,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:padding="5dp"
-                    android:text="Too much clients can freeze or reset some APs."
+                    android:text="Too much clients can freeze or reset some APs"
                     android:textSize="11dp" />
 
             </LinearLayout>
@@ -209,7 +209,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:textSize="11dp"
-                    android:text="Sends beacon frames to show fake APs at clients."
+                    android:text="Sends beacon frames to show fake APs at clients"
                     android:padding="5dp"/>
 
             </LinearLayout>
@@ -257,7 +257,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:textSize="11dp"
-                    android:text="Open kismet website."
+                    android:text="Open kismet website"
                     android:padding="5dp"/>
 
             </LinearLayout>
@@ -280,7 +280,7 @@
                     android:layout_width="45dp"
                     android:layout_height="45dp"
                     android:background="@drawable/circle_background_second"
-                    android:src="@drawable/baseline_admin_panel_settings_white_24dp"
+                    android:src="@drawable/baseline_developer_mode_white_24dp"
                     android:padding="10dp" />
                 <TextView
                     android:layout_width="wrap_content"
@@ -299,7 +299,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:textSize="11dp"
-                    android:text="Run commands directly on the raspberry pi."
+                    android:text="Run commands directly on the raspberry pi"
                     android:padding="5dp"/>
 
             </LinearLayout>
