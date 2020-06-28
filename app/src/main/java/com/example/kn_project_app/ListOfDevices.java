@@ -62,28 +62,52 @@ public class ListOfDevices extends AppCompatActivity implements MyCallback {
     class CustomAdapter extends BaseAdapter{
 
         ArrayList<Device> devices;
+        ArrayList<Device> accessPoints;
         Device accessPoint;
         int attackNumber;
+        boolean stageSecond = false;
 
         public CustomAdapter(ArrayList<Device> devices, int attackNumber, Device accessPoint) {
             this.devices = devices;
             this.attackNumber = attackNumber;
             this.accessPoint = accessPoint;
+            this.accessPoints = sortAccessPoint(devices);
         }
 
         public CustomAdapter(ArrayList<Device> devices, int attackNumber) {
             this.devices = devices;
             this.attackNumber = attackNumber;
+            this.accessPoints = sortAccessPoint(devices);
         }
 
+        public ArrayList<Device> sortAccessPoint(ArrayList<Device> devices) {
+            ArrayList<Device> devicesToSort = devices;
+            ArrayList<Device> temp = new ArrayList<>();
+            for (Device device : devicesToSort){
+                if(device.getDeviceType().equals("Access Point"))
+                    temp.add(device);
+            }
+            for (Device device: temp){
+                Log.d("WALASZEK:",device.getName());
+            }
+            Log.d("ILOSC AP: ", Integer.toString(temp.size()));
+            if (temp.size() == 0)
+                stageSecond = true;
+            Log.d("STAGE: ", Boolean.toString(stageSecond));
+            return temp;
+        }
         @Override
         public int getCount() {
-            return devices.size();
+            if (stageSecond)
+                return devices.size();
+            return accessPoints.size();
         }
 
         @Override
         public Object getItem(int position) {
-            return devices.get(position);
+            if (stageSecond)
+                return devices.get(position);
+            return accessPoints.get(position);
         }
 
         @Override
@@ -125,11 +149,16 @@ public class ListOfDevices extends AppCompatActivity implements MyCallback {
                                     e.printStackTrace();
                                 }
                             }
-                            Intent intent = new Intent(ListOfDevices.this, ListOfDevices.class);
-                            intent.putParcelableArrayListExtra("devices", tempDevices);
-                            intent.putExtra("attackNumber", attackNumber);
-                            intent.putExtra("accessPoint", device);
-                            startActivity(intent);
+                            if (tempDevices.size() == 0){
+                                Toast.makeText(ListOfDevices.this,"No devices connected to AP.", Toast.LENGTH_SHORT).show();
+                            }
+                            else {
+                                Intent intent = new Intent(ListOfDevices.this, ListOfDevices.class);
+                                intent.putParcelableArrayListExtra("devices", tempDevices);
+                                intent.putExtra("attackNumber", attackNumber);
+                                intent.putExtra("accessPoint", device);
+                                startActivity(intent);
+                            }
                         }
                         if (attackNumber == 2){
                             Intent intent = new Intent(ListOfDevices.this, AttackToggleAccessPoint.class);
