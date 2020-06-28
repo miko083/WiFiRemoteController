@@ -10,6 +10,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.IBinder;
 
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -36,6 +37,7 @@ public class SendCommandActivity extends AppCompatActivity implements MyCallback
         sendToAWS = findViewById(R.id.sendToAWS);
         toAWSCom = findViewById(R.id.et_toAWSCom);
         fromAWSCom = findViewById(R.id.tv_fromAWSCom);
+        fromAWSCom.setMovementMethod(new ScrollingMovementMethod());
 
         sendToAWS.setOnClickListener(new View.OnClickListener() {
             @Override

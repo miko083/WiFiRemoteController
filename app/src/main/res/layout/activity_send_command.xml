@@ -9,31 +9,30 @@
     android:layout_margin="20dp"
     android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/et-toAWSCom"
-            android:textColor="@color/AWScolor"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
-            android:hint="Text To AWS"
-            android:textColorHint="@color/AWScolor"
-            android:layout_gravity="center"
-            android:layout_marginTop="35dp"
-            android:background="@drawable/edit"
-            android:padding="20dp"
-            />
+    <EditText
+        android:id="@+id/et-toAWSCom"
+        android:layout_width="300dp"
+        android:layout_height="90dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="35dp"
+        android:background="@drawable/edit"
+        android:hint="Text To AWS"
+        android:inputType="textEmailAddress"
+        android:padding="20dp"
+        android:textColor="@color/AWScolor"
+        android:textColorHint="@color/AWScolor" />
 
-        <TextView
-            android:id="@+id/tv-fromAWSCom"
-            android:textColor="@color/AWScolor"
-            android:layout_width="300dp"
-            android:layout_height="100dp"
-            android:textColorHint="@color/AWScolor"
-            android:layout_gravity="center"
-            android:layout_marginTop="35dp"
-            android:background="@drawable/edit"
-            android:padding="20dp"
-            />
+    <TextView
+        android:id="@+id/tv-fromAWSCom"
+        android:layout_width="300dp"
+        android:layout_height="248dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="35dp"
+        android:background="@drawable/edit"
+        android:padding="5dp"
+        android:textColor="@color/AWScolor"
+        android:textColorHint="@color/AWScolor"
+        android:scrollbars = "vertical"/>
 
         <Button
             android:id="@+id/sendToAWS"
