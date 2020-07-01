@@ -13,7 +13,6 @@ public class Device implements Parcelable {
     private String bssid;
 
     public Device(int imageNumber, String name, String deviceType, String channel, String macAddress, String freqmhz, String bssid) {
-    //public Device(int imageNumber, String deviceType, String channel, String macAddress) {
         this.imageNumber = imageNumber;
         this.name = name;
         this.deviceType = deviceType;
@@ -48,10 +47,6 @@ public class Device implements Parcelable {
     public int getImageNumber() {
         return imageNumber;
     }
-
-//    public String getManufacturer() {
-//        return manufacturer;
-//    }
 
     public String getName() {
         return name;

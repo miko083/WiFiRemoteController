@@ -72,8 +72,6 @@ public class SshOperations extends Service {
         Log.d("TUNNEL: ","Conneted to Kismet" );
         Log.d("CONNECTION: ","Connected to AWS");
 
-        //sendCommandToAWS("airmon-ng start wlan1 && airodump-ng wlan1 --output-format netxml -w /tmp/recent > /dev/null 2>&1");
-
         return true;
     }
 
@@ -120,7 +118,6 @@ public class SshOperations extends Service {
             ChannelExec channelExec = null;
             try {
                 channelExec = (ChannelExec) sessionRaspberry.openChannel("exec");
-                //channelExec = (ChannelExec) sessionAWS.openChannel("exec");
             } catch (JSchException e) {
                 e.printStackTrace();
             }
@@ -235,87 +232,4 @@ public class SshOperations extends Service {
             return null;
         }
     }
-
-    // ---------------------------------------
-    // ----------- TODO TASKS  ---------------
-    // ---------------------------------------
-    /*
-
-    public void connectToKismet() throws JSchException {
-        this.open("ubuntu", "proxy-vm.ddns.net", 22);
-        // SSH tunnel parameter to the kismet:
-        int tunnelLocalPort = 54321;
-        String tunnelRemoteHost = "localhost";
-        int tunnelRemotePort = 52501;
-        session.setPortForwardingL(tunnelLocalPort, tunnelRemoteHost, tunnelRemotePort);
-
-        Log.d("TUNNEL: ","Conneted to Kismet" );
-    }
-
-    //metoda wywołuje open() zestawiając połączenie do proxy-vm.ddns.net
-    //następnie zestawia tunel: (android) localhost:54322 --> (VM) localhost:50022
-    //TODO: połączyć metody connectToKismet() i connectToRaspberry() w jedną
-    public void connectToRaspberry() throws JSchException {
-        this.open("ubuntu", "proxy-vm.ddns.net", 22);
-        // SSH tunnel parameter to the kismet:
-        int tunnelLocalPort = 54322;
-        String tunnelRemoteHost = "localhost";
-        int tunnelRemotePort = 50022;
-        session.setPortForwardingL(tunnelLocalPort, tunnelRemoteHost, tunnelRemotePort);
-
-        Log.d("TUNNEL: ","Conneted to Kismet" );
-    }
-
-
-    public String runCommand (String command) throws  JSchException, IOException {
-        String ret = "";
-        if (!session.isConnected())
-            throw new RuntimeException("Connect First");
-
-        ChannelExec channelExec = null;
-        channelExec = (ChannelExec) session.openChannel("exec");
-
-        channelExec.setCommand(command);
-        channelExec.setInputStream(null);
-
-        //PrintStream out = new PrintStream(channelExec.getOutputStream());
-        InputStream in = channelExec.getInputStream();
-
-        channelExec.connect();
-
-        ret = getChannelOutput(channelExec, in);
-        channelExec.disconnect();
-        Log.d("SENT COMMAND: ", command);
-
-        return ret;
-    }
-
-
-
-    public void close(){
-        session.disconnect();
-        Log.d("CONNECTION: ", "LOGOUT FROM AWS");
-    }
-
-    private static void executeCommand(byte[] privateKey, String command) {
-
-        JSch sshClient = new JSch();
-        java.util.Properties config = new java.util.Properties();
-        config.put("StrictHostKeyChecking", "no");
-        try {
-            Log.d("PRIVATEKEY: ", Arrays.toString(privateKey));
-            sshClient.addIdentity("", privateKey, null, null);
-            com.jcraft.jsch.Session session = sshClient.getSession("ubuntu", "ec2-3-17-16-182.us-east-2.compute.amazonaws.com");
-            session.setConfig(config);
-            session.connect();
-            ChannelExec channelExec = (ChannelExec) session.openChannel("exec");
-            channelExec.setCommand(command);
-            channelExec.connect();
-            channelExec.start();
-        } catch (JSchException e2) {
-            Log.d("SSH Error", e2.getMessage());
-        }
-    }
-
-     */
 }

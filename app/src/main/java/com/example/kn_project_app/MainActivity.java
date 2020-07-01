@@ -67,8 +67,6 @@ public class MainActivity extends AppCompatActivity implements MyCallback {
             @Override
             public void onClick(View v) {
                 if(mBoundService.getStatusFromAWS()) {
-                    //new executeCommand(MainActivity.this, "cat example-01.kismet.netxml",1).execute();
-                    //new executeCommand(MainActivity.this, "cat $(ls /root/.airodump/recent-0* | sort | tail -1)").execute();
                     new executeCommand(MainActivity.this, "cat $(ls /tmp/recent-* | sort | tail -1)",1).execute();
                 } else
                     Toast.makeText(MainActivity.this, "Connect first to AWS.", Toast.LENGTH_SHORT).show();
@@ -80,8 +78,6 @@ public class MainActivity extends AppCompatActivity implements MyCallback {
             @Override
             public void onClick(View v) {
                 if(mBoundService.getStatusFromAWS()) {
-                    //new executeCommand(MainActivity.this, "cat example-01.kismet.netxml",2).execute();
-                    //new executeCommand(MainActivity.this, "cat $(ls /root/.airodump/recent-0* | sort | tail -1)").execute();
                     new executeCommand(MainActivity.this, "cat $(ls /tmp/recent-* | sort | tail -1)",2).execute();
                 } else
                     Toast.makeText(MainActivity.this, "Connect first to AWS.", Toast.LENGTH_SHORT).show();
@@ -93,8 +89,6 @@ public class MainActivity extends AppCompatActivity implements MyCallback {
             @Override
             public void onClick(View v) {
                 if(mBoundService.getStatusFromAWS()) {
-                    //new executeCommand(MainActivity.this, "cat example-01.kismet.netxml",3).execute();
-                    //new executeCommand(MainActivity.this, "cat $(ls /root/.airodump/recent-0* | sort | tail -1)").execute();
                     new executeCommand(MainActivity.this, "cat $(ls /tmp/recent-* | sort | tail -1)",3).execute();
                 } else
                     Toast.makeText(MainActivity.this, "Connect first to AWS.", Toast.LENGTH_SHORT).show();
@@ -106,9 +100,6 @@ public class MainActivity extends AppCompatActivity implements MyCallback {
             @Override
             public void onClick(View v) {
                 if(mBoundService.getStatusFromAWS()) {
-                    //new executeCommand(MainActivity.this, "touch wirusWatykanczyk",4, "Utworzono wirus watykanczyk").execute();
-                    //new executeCommand(MainActivity.this, "cat $(ls /root/.airodump/recent-0* | sort | tail -1)").execute();
-                    //new executeCommand(MainActivity.this, "cat $(ls /tmp/recent-* | sort | tail -1)",1).execute();
                     Intent intent = new Intent(MainActivity.this, AttackToggleOnOffOnly.class);
                     startActivity(intent);
                 } else
@@ -153,8 +144,6 @@ public class MainActivity extends AppCompatActivity implements MyCallback {
                 return true;
             }
             case R.id.disconnectAWS:{
-                //new executeCommand(MainActivity.this, "tmux kill-session -t kismet; tmux kill-session -t airodump; tmux kill-session -t deAuth; tmux kill-session -t fakeProbe; tmux kill-session -t fakeAuth; tmux kill-session -t beaconFlood; airmon-ng stop wlan1", 0).execute();
-                //mBoundService.sendCommandToAWS("tmux kill-session -t kismet; tmux kill-session -t airodump; tmux kill-session -t deAuth; tmux kill-session -t fakeProbe; tmux kill-session -t fakeAuth; tmux kill-session -t beaconFlood; airmon-ng stop wlan1");
                 changeAWSStatus("Offline");
                 mBoundService.disconnectAWS();
                 Toast.makeText(this, "Disconnected", Toast.LENGTH_SHORT).show();
@@ -162,7 +151,6 @@ public class MainActivity extends AppCompatActivity implements MyCallback {
             case R.id.getListOfDevices:{
                 if (mBoundService.getStatusFromAWS()){
                     new executeCommand(MainActivity.this, "cat $(ls /tmp/recent-* | sort | tail -1)", 0).execute();
-                    //new executeCommand(MainActivity.this, "cat $(ls /tmp/recent-* | sort | tail -1)",2137).execute();
                 }
                 else {
                     Toast.makeText(MainActivity.this, "Connect first to AWS.", Toast.LENGTH_SHORT).show();

@@ -17,8 +17,6 @@ import android.widget.Toast;
 import com.jcraft.jsch.JSchException;
 
 public class KismetWebsite extends AppCompatActivity implements MyCallback {
-
-//    private WebView webView;
     private Uri uri;
     private boolean mShouldUnbind;
     private SshOperations mBoundService;
@@ -29,11 +27,6 @@ public class KismetWebsite extends AppCompatActivity implements MyCallback {
         setContentView(R.layout.activity_kismet_website);
 
         getSupportActionBar().hide();
-
-
-//        webView=(WebView)findViewById(R.id.webView);
-//        webView.setWebViewClient(new WebViewClient());
-//        webView.loadUrl("http://localhost:54321");
 
         uri = Uri.parse("http://localhost:54321"); // missing 'http://' will cause crashed
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
