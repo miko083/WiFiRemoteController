@@ -34,3 +34,9 @@ Run commands directly on the Raspberry PI.
 
 ### Main Menu
 
+![Main menu](https://github.com/miko083/WiFiRemoteController/blob/master/images/main_menu.)
+
+## Authors
+
+* [Paweł Czaja](https://github.com/GitHub-Pawel) - Kali Linux scirpts, linking them to Android App 
+* [Mikołaj Stoch](https://github.com/miko083) - Android App
