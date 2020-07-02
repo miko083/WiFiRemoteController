@@ -2,6 +2,8 @@
 
 App which allows to connect to Raspberry PI (with Linux installed) in different network through AWS service. Please use your own key and EC2 instance.
 
+![Scheme](https://github.com/miko083/WiFiRemoteController/blob/master/images/scheme.png)
+
 ## Features
 
 ### Attacks
@@ -34,7 +36,7 @@ Run commands directly on the Raspberry PI.
 
 ### Main Menu
 
-![Main menu](https://github.com/miko083/WiFiRemoteController/blob/master/images/main_menu.png =540x960)
+![Main menu](https://github.com/miko083/WiFiRemoteController/blob/master/images/main_menu.png)
 
 ## Authors
 
