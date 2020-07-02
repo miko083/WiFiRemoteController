@@ -34,7 +34,7 @@ Run commands directly on the Raspberry PI.
 
 ### Main Menu
 
-![Main menu](https://github.com/miko083/WiFiRemoteController/blob/master/images/main_menu.)
+![Main menu](https://github.com/miko083/WiFiRemoteController/blob/master/images/main_menu.png)
 
 ## Authors
 
